@@ -5,35 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Staff Time Log — A2B Stores</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:        #f4f5f7;
-    --surface:   #ffffff;
-    --border:    #e2e5ea;
-    --border2:   #c8cdd6;
-    --text:      #1a1f2e;
-    --text2:     #5a6278;
-    --text3:     #9099b0;
-    --accent:    #1a3a5c;
-    --accent-lt: #eef4fb;
-    --accent-md: #daeaf7;
-    --green:     #0f6e56;
-    --green-lt:  #e1f5ee;
-    --amber:     #7a4f0d;
-    --amber-lt:  #faeeda;
-    --red:       #b91c1c;
-    --red-lt:    #fee2e2;
-    --mono:      'DM Mono', monospace;
-    --sans:      'DM Sans', system-ui, sans-serif;
-    --radius:    10px;
-    --radius-lg: 16px;
+    --bg:       #f4f5f7;
+    --surface:  #ffffff;
+    --border:   #e2e5ea;
+    --text:     #1a1f2e;
+    --text2:    #5a6278;
+    --text3:    #9099b0;
+    --accent:   #1a3a5c;
+    --accent-lt:#eef4fb;
+    --accent-md:#daeaf7;
+    --green:    #0f6e56;
+    --green-lt: #e1f5ee;
+    --amber:    #7a4f0d;
+    --amber-lt: #faeeda;
+    --red:      #b91c1c;
+    --mono:     'DM Mono', monospace;
+    --sans:     'DM Sans', system-ui, sans-serif;
+    --r:        10px;
+    --rl:       16px;
   }
-
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -44,168 +38,140 @@
     justify-content: center;
     padding: 2rem 1rem 4rem;
   }
-
   .card {
     background: var(--surface);
-    border-radius: var(--radius-lg);
+    border-radius: var(--rl);
     border: 1px solid var(--border);
     width: 100%;
-    max-width: 480px;
+    max-width: 460px;
     overflow: hidden;
   }
 
-  /* ── HEADER ── */
+  /* HEADER */
   .app-header {
     background: var(--accent);
-    padding: 1.5rem 1.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 1.4rem 1.75rem;
+    display: flex; align-items: center; justify-content: space-between;
   }
   .app-header-left { display: flex; align-items: center; gap: 12px; }
   .app-logo { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .app-logo i { font-size: 22px; color: #fff; }
   .app-title { font-size: 16px; font-weight: 600; color: #fff; }
-  .app-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+  .app-sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 1px; }
   .live-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 20px; }
   .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
 
-  /* ── LOGIN ── */
+  /* LOGIN */
   .login-body { padding: 2rem 1.75rem; }
   .login-intro { text-align: center; margin-bottom: 1.75rem; }
   .login-intro h2 { font-size: 20px; font-weight: 600; }
   .login-intro p { font-size: 13px; color: var(--text2); margin-top: 4px; }
-
   .field { margin-bottom: 1.1rem; }
   .field label { display: block; font-size: 11px; font-weight: 600; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
   .field input {
     width: 100%; padding: 11px 13px;
-    border: 1px solid var(--border); border-radius: var(--radius);
+    border: 1px solid var(--border); border-radius: var(--r);
     font-size: 15px; font-family: var(--sans);
     background: var(--surface); color: var(--text);
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,92,0.1); }
-
-  .btn { width: 100%; padding: 12px; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 600; font-family: var(--sans); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; }
-  .btn:hover { opacity: 0.88; }
+  .btn { width: 100%; padding: 12px; border: none; border-radius: var(--r); font-size: 15px; font-weight: 600; font-family: var(--sans); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; }
+  .btn:hover { opacity: 0.87; }
   .btn:active { transform: scale(0.98); }
   .btn:disabled { opacity: 0.42; cursor: not-allowed; transform: none; }
   .btn-accent { background: var(--accent); color: #fff; }
-  .btn-outline { background: none; border: 1px solid var(--border); color: var(--text2); font-size: 13px; padding: 7px 14px; width: auto; }
-  .btn-outline:hover { background: var(--bg); opacity: 1; }
-
+  .btn-outline { background: none; border: 1px solid var(--border); color: var(--text2); font-size: 13px; padding: 7px 14px; width: auto; font-family: var(--sans); cursor: pointer; border-radius: var(--r); display: flex; align-items: center; gap: 6px; }
+  .btn-outline:hover { background: var(--bg); }
   .err-msg { font-size: 13px; color: var(--red); margin-top: 10px; text-align: center; min-height: 18px; }
 
-  /* ── MAIN ── */
+  /* MAIN */
   .main-wrap { display: none; }
-  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.75rem; border-bottom: 1px solid var(--border); background: #f9fafc; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.75rem; border-bottom: 1px solid var(--border); background: #f9fafc; }
   .topbar-l { display: flex; align-items: center; gap: 10px; }
   .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .topbar-name { font-size: 14px; font-weight: 600; }
   .topbar-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
 
   .main-body { padding: 1.5rem 1.75rem; }
-
   .step-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 10px; }
-  .divider { height: 1px; background: var(--border); margin: 1.35rem 0; }
+  .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
 
-  /* LOCATION */
-  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-  .loc-card {
-    border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 13px 11px; cursor: pointer;
-    transition: all 0.13s; background: var(--surface);
+  /* LOCATION DROPDOWN */
+  .loc-select {
+    width: 100%;
+    padding: 12px 38px 12px 13px;
+    border: 1px solid var(--border); border-radius: var(--r);
+    font-size: 15px; font-family: var(--sans);
+    background: var(--surface); color: var(--text);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6278' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+    transition: border-color 0.15s;
   }
-  .loc-card:hover { border-color: var(--accent); background: var(--accent-lt); }
-  .loc-card.selected { border: 2px solid var(--accent); background: var(--accent-lt); }
-  .loc-card i { font-size: 22px; color: var(--accent); margin-bottom: 7px; display: block; }
-  .loc-name { font-size: 13px; font-weight: 600; }
-  .loc-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .loc-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,92,0.1); }
 
   .geo-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 4px 11px; border-radius: 20px; margin-bottom: 10px; }
-  .geo-ok { background: var(--green-lt); color: var(--green); }
+  .geo-ok   { background: var(--green-lt); color: var(--green); }
   .geo-miss { background: var(--amber-lt); color: var(--amber); }
 
   textarea.notes {
-    width: 100%; padding: 10px 13px;
-    border: 1px solid var(--border); border-radius: var(--radius);
+    width: 100%; padding: 10px 13px; margin-top: 10px;
+    border: 1px solid var(--border); border-radius: var(--r);
     font-size: 14px; font-family: var(--sans);
     background: var(--surface); color: var(--text);
-    resize: vertical; min-height: 70px; margin-bottom: 0;
+    resize: vertical; min-height: 70px;
   }
   textarea.notes:focus { outline: none; border-color: var(--accent); }
 
-  /* DATE */
-  .date-row { display: flex; gap: 10px; align-items: center; }
-  .date-row input[type=date] {
-    flex: 1; padding: 11px 13px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    font-size: 15px; font-family: var(--sans);
-    background: var(--surface); color: var(--text);
+  /* DATE — read only display */
+  .date-display {
+    width: 100%; padding: 12px 13px;
+    border: 1px solid var(--border); border-radius: var(--r);
+    font-size: 15px; background: #f9fafc; color: var(--text);
+    display: flex; align-items: center; gap: 10px;
   }
-  .date-row input[type=date]:focus { outline: none; border-color: var(--accent); }
-  .today-btn { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-lt); border: 1px solid rgba(26,58,92,0.2); border-radius: var(--radius); padding: 10px 13px; cursor: pointer; white-space: nowrap; font-family: var(--sans); }
-  .today-btn:hover { background: var(--accent-md); }
+  .date-display i { color: var(--text3); font-size: 18px; }
 
-  /* CLOCK */
+  /* CLOCK — single display only */
   .time-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 6px; }
-  .clock-box { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 12px; background: var(--surface); }
-  .clock-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text2); margin-bottom: 8px; }
-  .clock-disp { font-size: 32px; font-weight: 500; color: var(--accent); text-align: center; letter-spacing: 3px; font-family: var(--mono); padding: 6px 0; }
-  .clock-ctrl { display: grid; grid-template-columns: 1fr 14px 1fr; gap: 4px; align-items: center; }
+  .clock-box { border: 1px solid var(--border); border-radius: var(--r); padding: 14px 12px; background: var(--surface); }
+  .clock-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text2); margin-bottom: 10px; }
+  .clock-disp { font-size: 34px; font-weight: 500; color: var(--accent); text-align: center; letter-spacing: 3px; font-family: var(--mono); margin-bottom: 10px; }
+
+  .clock-ctrl { display: grid; grid-template-columns: 1fr 10px 1fr; gap: 4px; align-items: center; }
   .tpart { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-  .colon { font-size: 18px; color: var(--text3); text-align: center; font-weight: 500; }
+  .colon { font-size: 16px; color: var(--text3); text-align: center; font-weight: 500; padding-bottom: 2px; }
   .adj {
-    width: 36px; height: 28px;
+    width: 38px; height: 30px;
     border: 1px solid var(--border); border-radius: 7px;
     background: var(--bg); color: var(--text);
     font-size: 14px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.1s; font-family: var(--sans);
+    font-family: var(--sans); transition: all 0.1s;
+    user-select: none;
   }
   .adj:hover { background: var(--accent-lt); color: var(--accent); border-color: rgba(26,58,92,0.25); }
-  .tval { font-size: 26px; font-weight: 500; color: var(--text); font-family: var(--mono); min-width: 48px; text-align: center; }
-  .dur-hint { font-size: 12px; color: var(--text2); text-align: center; min-height: 18px; margin-bottom: 1.35rem; }
+  .adj:active { transform: scale(0.93); }
+
+  .dur-hint { font-size: 12px; color: var(--text2); text-align: center; min-height: 18px; margin-bottom: 1.25rem; }
 
   /* SUBMIT */
   .sub-msg { margin-top: 11px; font-size: 13px; text-align: center; min-height: 20px; line-height: 1.5; }
-  .sub-msg.ok { color: var(--green); }
+  .sub-msg.ok  { color: var(--green); }
   .sub-msg.err { color: var(--red); }
 
-  /* HISTORY */
-  .hist-toggle {
-    width: 100%; margin-top: 1.25rem; padding: 10px;
-    background: none; border: 1px solid var(--border);
-    border-radius: var(--radius); font-size: 13px;
-    color: var(--text2); cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 7px;
-    font-family: var(--sans); transition: background 0.13s;
-  }
-  .hist-toggle:hover { background: var(--bg); }
-  .hist-wrap { margin-top: 1rem; }
-  .hist-item { padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; background: var(--surface); }
-  .hist-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .hist-loc { font-size: 13px; font-weight: 600; }
-  .hist-note { font-size: 11px; color: var(--text2); margin-top: 1px; }
-  .hist-date { font-size: 12px; color: var(--text2); margin-top: 3px; }
-  .hist-time { font-size: 13px; color: var(--accent); margin-top: 3px; }
-  .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
-  .badge-pend { background: var(--amber-lt); color: var(--amber); }
-  .badge-appr { background: var(--green-lt); color: var(--green); }
-  .hist-empty { font-size: 13px; color: var(--text2); text-align: center; padding: 1.25rem; }
+  .app-footer { text-align: center; padding: 1rem; font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); }
 
   .spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.65s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* FOOTER */
-  .app-footer { text-align: center; padding: 1rem; font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); }
-
   @media (max-width: 420px) {
-    body { padding: 0; align-items: flex-start; }
+    body { padding: 0; }
     .card { border-radius: 0; border-left: none; border-right: none; max-width: 100%; min-height: 100vh; }
-    .clock-disp { font-size: 26px; }
-    .tval { font-size: 22px; }
+    .clock-disp { font-size: 28px; }
   }
 </style>
 </head>
@@ -239,7 +205,7 @@
         <label>PIN</label>
         <input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password" />
       </div>
-      <button class="btn btn-accent" id="loginBtn" onclick="doLogin()">
+      <button class="btn btn-accent" onclick="doLogin()">
         <i class="ti ti-login"></i> Sign in
       </button>
       <p class="err-msg" id="loginErr"></p>
@@ -253,88 +219,71 @@
         <div class="avatar" id="avatarEl">DV</div>
         <div>
           <div class="topbar-name" id="greetName">Welcome</div>
-          <div class="topbar-sub" id="greetSub">Select location and log your hours</div>
+          <div class="topbar-sub">Select location and log your hours</div>
         </div>
       </div>
-      <button class="btn btn-outline" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
+      <button class="btn-outline" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
 
     <div class="main-body">
 
-      <!-- STEP 1 -->
+      <!-- STEP 1 — LOCATION -->
       <div class="step-lbl">Step 1 — Location</div>
       <div id="geoHint"></div>
-      <div class="loc-grid">
-        <div class="loc-card" data-loc="Canning Vale Warehouse" onclick="selLoc(this)">
-          <i class="ti ti-building-warehouse"></i>
-          <div class="loc-name">Canning Vale</div>
-          <div class="loc-sub">Warehouse</div>
-        </div>
-        <div class="loc-card" data-loc="Harrisdale A2B" onclick="selLoc(this)">
-          <i class="ti ti-shopping-bag"></i>
-          <div class="loc-name">Harrisdale</div>
-          <div class="loc-sub">A2B Store</div>
-        </div>
-        <div class="loc-card" data-loc="Yokine A2B" onclick="selLoc(this)">
-          <i class="ti ti-shopping-bag"></i>
-          <div class="loc-name">Yokine</div>
-          <div class="loc-sub">A2B Store</div>
-        </div>
-        <div class="loc-card" data-loc="Others" onclick="selLoc(this)">
-          <i class="ti ti-map-pin"></i>
-          <div class="loc-name">Others</div>
-          <div class="loc-sub">Add note below</div>
-        </div>
-      </div>
-      <div id="othersWrap" style="display:none; margin-bottom:4px;">
+      <select class="loc-select" id="locSelect" onchange="onLocChange()">
+        <option value="">— Select a location —</option>
+        <option value="Canning Vale Warehouse">Canning Vale Warehouse</option>
+        <option value="Harrisdale A2B">Harrisdale A2B</option>
+        <option value="Yokine A2B">Yokine A2B</option>
+        <option value="Others">Others</option>
+      </select>
+      <div id="othersWrap" style="display:none">
         <textarea class="notes" id="otherNote" placeholder="e.g. Diwali Mela stall at Perth City — market event"></textarea>
       </div>
 
       <div class="divider"></div>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2 — DATE (today only, locked) -->
       <div class="step-lbl">Step 2 — Date</div>
-      <div class="date-row" style="margin-bottom:0">
-        <input type="date" id="dateInput" onchange="calcDur()" />
-        <button class="today-btn" onclick="setToday()"><i class="ti ti-calendar-today"></i> Today</button>
+      <div class="date-display">
+        <i class="ti ti-calendar-event"></i>
+        <span id="todayLabel"></span>
       </div>
 
       <div class="divider"></div>
 
-      <!-- STEP 3 -->
+      <!-- STEP 3 — TIMES -->
       <div class="step-lbl">Step 3 — Start &amp; finish time</div>
       <div class="time-row">
+        <!-- START -->
         <div class="clock-box">
           <div class="clock-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start</div>
           <div class="clock-disp" id="sdsp">08:00</div>
           <div class="clock-ctrl">
             <div class="tpart">
-              <button class="adj" onclick="adj('s','h',1)" aria-label="Increase start hour"><i class="ti ti-chevron-up"></i></button>
-              <span class="tval" id="sH">08</span>
-              <button class="adj" onclick="adj('s','h',-1)" aria-label="Decrease start hour"><i class="ti ti-chevron-down"></i></button>
+              <button class="adj" onclick="adj('s','h',1)"  aria-label="Start hour up">&#8743;</button>
+              <button class="adj" onclick="adj('s','h',-1)" aria-label="Start hour down">&#8744;</button>
             </div>
-            <div class="colon">:</div>
+            <div class="colon"></div>
             <div class="tpart">
-              <button class="adj" onclick="adj('s','m',15)" aria-label="Increase start minutes"><i class="ti ti-chevron-up"></i></button>
-              <span class="tval" id="sM">00</span>
-              <button class="adj" onclick="adj('s','m',-15)" aria-label="Decrease start minutes"><i class="ti ti-chevron-down"></i></button>
+              <button class="adj" onclick="adj('s','m',1)"  aria-label="Start min up">&#8743;</button>
+              <button class="adj" onclick="adj('s','m',-1)" aria-label="Start min down">&#8744;</button>
             </div>
           </div>
         </div>
+        <!-- FINISH -->
         <div class="clock-box">
           <div class="clock-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish</div>
           <div class="clock-disp" id="fdsp">17:00</div>
           <div class="clock-ctrl">
             <div class="tpart">
-              <button class="adj" onclick="adj('f','h',1)" aria-label="Increase finish hour"><i class="ti ti-chevron-up"></i></button>
-              <span class="tval" id="fH">17</span>
-              <button class="adj" onclick="adj('f','h',-1)" aria-label="Decrease finish hour"><i class="ti ti-chevron-down"></i></button>
+              <button class="adj" onclick="adj('f','h',1)"  aria-label="Finish hour up">&#8743;</button>
+              <button class="adj" onclick="adj('f','h',-1)" aria-label="Finish hour down">&#8744;</button>
             </div>
-            <div class="colon">:</div>
+            <div class="colon"></div>
             <div class="tpart">
-              <button class="adj" onclick="adj('f','m',15)" aria-label="Increase finish minutes"><i class="ti ti-chevron-up"></i></button>
-              <span class="tval" id="fM">00</span>
-              <button class="adj" onclick="adj('f','m',-15)" aria-label="Decrease finish minutes"><i class="ti ti-chevron-down"></i></button>
+              <button class="adj" onclick="adj('f','m',1)"  aria-label="Finish min up">&#8743;</button>
+              <button class="adj" onclick="adj('f','m',-1)" aria-label="Finish min down">&#8744;</button>
             </div>
           </div>
         </div>
@@ -343,49 +292,50 @@
 
       <div class="divider" style="margin-top:0"></div>
 
-      <!-- STEP 4 -->
+      <!-- STEP 4 — SUBMIT -->
       <div class="step-lbl">Step 4 — Submit for approval</div>
       <button class="btn btn-accent" id="subBtn" onclick="doSubmit()">
         <i class="ti ti-send"></i> Submit hours
       </button>
       <p class="sub-msg" id="subMsg"></p>
 
-      <!-- HISTORY -->
-      <button class="hist-toggle" onclick="toggleHist()">
-        <i class="ti ti-history"></i>
-        <span id="histLbl">View my recent submissions</span>
-      </button>
-      <div id="histWrap" style="display:none" class="hist-wrap"></div>
-
-    </div><!-- /main-body -->
-  </div><!-- /main-wrap -->
+    </div>
+  </div>
 
   <div class="app-footer">A2B Stores Staff Portal &nbsp;·&nbsp; Hours logged are subject to manager approval</div>
-</div><!-- /card -->
+</div>
 
 <script>
+// ── CONFIG ───────────────────────────────────────────────────────────────────
 const SCRIPT = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
 
-// ── USERS — add more staff here ──────────────────────────────────────────────
-// Format: 'loginid (lowercase)': { pin:'####', name:'Display Name', initials:'XX' }
+// Add more staff here: 'loginid': { pin:'####', name:'Display Name', initials:'XX' }
 const USERS = {
-  deva:  { pin:'1234', name:'Deva',  initials:'DV' }
+  deva: { pin:'1234', name:'Deva', initials:'DV' }
 };
-// ─────────────────────────────────────────────────────────────────────────────
 
 const GEO = [
   { name:'Canning Vale Warehouse', lat:-32.055, lon:115.918, r:800 },
   { name:'Harrisdale A2B',         lat:-32.087, lon:115.876, r:800 },
   { name:'Yokine A2B',             lat:-31.890, lon:115.855, r:800 }
 ];
+// ─────────────────────────────────────────────────────────────────────────────
 
-let S = { user:null, loc:null, sH:8, sM:0, fH:17, fM:0, histOpen:false, busy:false };
+let S = { user:null, sH:8, sM:0, fH:17, fM:0, busy:false };
 let sheetRows = [];
 
 const pad    = n => String(n).padStart(2,'0');
 const mins   = (h,m) => h*60+m;
-const today  = () => { const d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); };
 const t2mins = t => { if(!t) return 0; const p=String(t).split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); };
+
+// Today's date string YYYY-MM-DD and display string
+function todayISO() {
+  const d = new Date();
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+function todayDisplay() {
+  return new Date().toLocaleDateString('en-AU', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+}
 
 // ── LOGIN ────────────────────────────────────────────────────────────────────
 function doLogin() {
@@ -399,20 +349,20 @@ function doLogin() {
   }
   err.textContent = '';
   S.user = { id, ...USERS[id] };
-  document.getElementById('loginSection').style.display = 'none';
-  document.getElementById('mainSection').style.display  = 'block';
-  document.getElementById('avatarEl').textContent  = S.user.initials;
-  document.getElementById('greetName').textContent = 'Hello, ' + S.user.name;
-  document.getElementById('dateInput').value = today();
+  document.getElementById('loginSection').style.display  = 'none';
+  document.getElementById('mainSection').style.display   = 'block';
+  document.getElementById('avatarEl').textContent        = S.user.initials;
+  document.getElementById('greetName').textContent       = 'Hello, ' + S.user.name;
+  document.getElementById('todayLabel').textContent      = todayDisplay();
   calcDur();
   detectGeo();
-  loadHistory();
+  loadSheetRows();
 }
 document.getElementById('lid').addEventListener('keydown',  e => { if(e.key==='Enter') document.getElementById('lpin').focus(); });
 document.getElementById('lpin').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 
 function doLogout() {
-  S = { user:null,loc:null,sH:8,sM:0,fH:17,fM:0,histOpen:false,busy:false };
+  S = { user:null, sH:8, sM:0, fH:17, fM:0, busy:false };
   sheetRows = [];
   document.getElementById('loginSection').style.display = 'block';
   document.getElementById('mainSection').style.display  = 'none';
@@ -421,15 +371,13 @@ function doLogout() {
   document.getElementById('subMsg').textContent = '';
   document.getElementById('subMsg').className   = 'sub-msg';
   document.getElementById('geoHint').innerHTML  = '';
+  document.getElementById('locSelect').value    = '';
   document.getElementById('othersWrap').style.display = 'none';
-  document.getElementById('histWrap').style.display   = 'none';
-  document.getElementById('histLbl').textContent = 'View my recent submissions';
-  document.querySelectorAll('.loc-card').forEach(c => c.classList.remove('selected'));
-  ['sH','sM'].forEach((id,i) => document.getElementById(id).textContent = i?'00':'08');
-  ['fH','fM'].forEach((id,i) => document.getElementById(id).textContent = i?'00':'17');
-  document.getElementById('sdsp').textContent  = '08:00';
-  document.getElementById('fdsp').textContent  = '17:00';
-  document.getElementById('durHint').textContent = '';
+  document.getElementById('otherNote').value = '';
+  document.getElementById('sdsp').textContent = '08:00';
+  document.getElementById('fdsp').textContent = '17:00';
+  S.sH=8; S.sM=0; S.fH=17; S.fM=0;
+  calcDur();
 }
 
 // ── GEOLOCATION ──────────────────────────────────────────────────────────────
@@ -446,35 +394,27 @@ function detectGeo() {
     const el = document.getElementById('geoHint');
     if (best) {
       el.innerHTML = `<span class="geo-pill geo-ok"><i class="ti ti-map-pin"></i> GPS detected: ${best.name}</span>`;
-      document.querySelector(`.loc-card[data-loc="${best.name}"]`)?.click();
+      document.getElementById('locSelect').value = best.name;
+      onLocChange();
     } else {
-      el.innerHTML = `<span class="geo-pill geo-miss"><i class="ti ti-map-pin"></i> No nearby location — please select manually</span>`;
+      el.innerHTML = `<span class="geo-pill geo-miss"><i class="ti ti-map-pin"></i> No nearby location detected — please select manually</span>`;
     }
   }, ()=>{});
 }
 
 // ── LOCATION ─────────────────────────────────────────────────────────────────
-function selLoc(card) {
-  document.querySelectorAll('.loc-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-  S.loc = card.dataset.loc;
-  document.getElementById('othersWrap').style.display = S.loc === 'Others' ? 'block' : 'none';
+function onLocChange() {
+  const v = document.getElementById('locSelect').value;
+  document.getElementById('othersWrap').style.display = v === 'Others' ? 'block' : 'none';
 }
-
-// ── DATE ─────────────────────────────────────────────────────────────────────
-function setToday() { document.getElementById('dateInput').value = today(); calcDur(); }
 
 // ── CLOCK ────────────────────────────────────────────────────────────────────
 function adj(which, part, delta) {
   if (which==='s') {
-    if(part==='h') S.sH=(S.sH+delta+24)%24; else S.sM=(S.sM+delta+60)%60;
-    document.getElementById('sH').textContent   = pad(S.sH);
-    document.getElementById('sM').textContent   = pad(S.sM);
+    if (part==='h') S.sH=(S.sH+delta+24)%24; else S.sM=(S.sM+delta+60)%60;
     document.getElementById('sdsp').textContent = pad(S.sH)+':'+pad(S.sM);
   } else {
-    if(part==='h') S.fH=(S.fH+delta+24)%24; else S.fM=(S.fM+delta+60)%60;
-    document.getElementById('fH').textContent   = pad(S.fH);
-    document.getElementById('fM').textContent   = pad(S.fM);
+    if (part==='h') S.fH=(S.fH+delta+24)%24; else S.fM=(S.fM+delta+60)%60;
     document.getElementById('fdsp').textContent = pad(S.fH)+':'+pad(S.fM);
   }
   calcDur();
@@ -494,39 +434,35 @@ function calcDur() {
   }
 }
 
-// ── OVERLAP CHECK ─────────────────────────────────────────────────────────────
+// ── SHEET ROWS (for overlap check) ──────────────────────────────────────────
+async function loadSheetRows() {
+  try {
+    const res  = await fetch(SCRIPT+'?action=get&userId='+encodeURIComponent(S.user.id));
+    const data = await res.json();
+    if (data.ok && Array.isArray(data.rows)) sheetRows = data.rows;
+  } catch(e){}
+}
+
 function hasOverlap(date, sm, fm) {
   return sheetRows
     .filter(r => String(r[1]).toLowerCase()===S.user.id && r[5]===date)
     .some(r => { const es=t2mins(r[6]), ef=t2mins(r[7]); return sm<ef && fm>es; });
 }
 
-// ── LOAD HISTORY ──────────────────────────────────────────────────────────────
-async function loadHistory() {
-  try {
-    const res  = await fetch(SCRIPT+'?action=get&userId='+encodeURIComponent(S.user.id));
-    const data = await res.json();
-    if (data.ok && Array.isArray(data.rows)) {
-      sheetRows = data.rows;
-      if (S.histOpen) renderHistory();
-    }
-  } catch(e) {}
-}
-
-// ── SUBMIT ────────────────────────────────────────────────────────────────────
+// ── SUBMIT ───────────────────────────────────────────────────────────────────
 async function doSubmit() {
   if (S.busy) return;
   const msgEl = document.getElementById('subMsg');
-  const date  = document.getElementById('dateInput').value;
+  const loc   = document.getElementById('locSelect').value;
   const note  = document.getElementById('otherNote').value.trim();
+  const date  = todayISO();
 
-  if (!S.loc)                          { showErr('Please select a location.'); return; }
-  if (S.loc==='Others' && !note)       { showErr('Please enter a note for the Others location.'); return; }
-  if (!date)                           { showErr('Please select a date.'); return; }
+  if (!loc)                          { showErr('Please select a location.'); return; }
+  if (loc==='Others' && !note)       { showErr('Please enter a note for the Others location.'); return; }
 
   const sm=mins(S.sH,S.sM), fm=mins(S.fH,S.fM);
-  if (fm<=sm)           { showErr('Finish time must be after start time.'); return; }
-  if (hasOverlap(date,sm,fm)) { showErr('⚠ Time overlap! You already have a log covering this period on '+date+'.'); return; }
+  if (fm<=sm)                        { showErr('Finish time must be after start time.'); return; }
+  if (hasOverlap(date,sm,fm))        { showErr('⚠ Time overlap! You already have an entry covering this period today.'); return; }
 
   S.busy=true;
   const btn=document.getElementById('subBtn');
@@ -534,19 +470,21 @@ async function doSubmit() {
   btn.innerHTML='<span class="spinner"></span> Saving to Google Sheets…';
   msgEl.textContent='';
 
-  const dur=(( fm-sm)/60).toFixed(2);
+  const dur=((fm-sm)/60).toFixed(2);
+
+  // Column order: ID | User ID | Name | Location | Note | Date | Start | Finish | Duration (hrs) | Status | Submitted At
   const row=[
-    Date.now().toString(),
-    S.user.id,
-    S.user.name,
-    S.loc,
-    S.loc==='Others' ? note : '',
-    date,
-    pad(S.sH)+':'+pad(S.sM),
-    pad(S.fH)+':'+pad(S.fM),
-    dur,
-    'Pending',
-    new Date().toISOString()
+    Date.now().toString(),   // A — ID
+    S.user.id,               // B — User ID
+    S.user.name,             // C — Name
+    loc,                     // D — Location
+    loc==='Others'?note:'',  // E — Note
+    date,                    // F — Date
+    pad(S.sH)+':'+pad(S.sM),// G — Start
+    pad(S.fH)+':'+pad(S.fM),// H — Finish
+    dur,                     // I — Duration (hrs)
+    'Pending',               // J — Status
+    new Date().toISOString() // K — Submitted At
   ];
 
   let ok=false;
@@ -557,56 +495,26 @@ async function doSubmit() {
       body:JSON.stringify({ action:'append', row })
     });
     ok=true;
-  } catch(e) { ok=false; }
-
-  if (ok) {
-    sheetRows.push(row);
-    msgEl.className='sub-msg ok';
-    msgEl.innerHTML='&#10003; Saved! <strong>'+dur+' hrs</strong> on '+date+' at '+S.loc+' — pending manager approval.';
-  } else {
-    msgEl.className='sub-msg err';
-    msgEl.textContent='Network error — please check your connection and try again.';
-  }
+  } catch(e){ ok=false; }
 
   S.busy=false;
   btn.disabled=false;
   btn.innerHTML='<i class="ti ti-send"></i> Submit hours';
-  if (S.histOpen) renderHistory();
+
+  if (ok) {
+    sheetRows.push(row);
+    msgEl.className='sub-msg ok';
+    msgEl.innerHTML='&#10003; Saved! <strong>'+dur+' hrs</strong> at '+loc+' — pending manager approval.';
+  } else {
+    msgEl.className='sub-msg err';
+    msgEl.textContent='Network error — please check your connection and try again.';
+  }
 }
 
 function showErr(msg) {
   const el=document.getElementById('subMsg');
   el.className='sub-msg err';
   el.textContent=msg;
-}
-
-// ── HISTORY ───────────────────────────────────────────────────────────────────
-function toggleHist() {
-  S.histOpen=!S.histOpen;
-  document.getElementById('histWrap').style.display = S.histOpen ? 'block' : 'none';
-  document.getElementById('histLbl').textContent = S.histOpen ? 'Hide submissions' : 'View my recent submissions';
-  if (S.histOpen) renderHistory();
-}
-
-function renderHistory() {
-  const el   = document.getElementById('histWrap');
-  const rows = sheetRows.filter(r=>String(r[1]).toLowerCase()===S.user.id).slice(-20).reverse();
-  if (!rows.length) {
-    el.innerHTML='<p class="hist-empty">No submissions yet. Your entries will appear here once saved.</p>';
-    return;
-  }
-  el.innerHTML = rows.map(r=>`
-    <div class="hist-item">
-      <div class="hist-row">
-        <div style="min-width:0">
-          <div class="hist-loc"><i class="ti ti-map-pin" style="font-size:13px"></i> ${r[3]}</div>
-          ${r[4] ? '<div class="hist-note">'+r[4]+'</div>' : ''}
-          <div class="hist-date">${r[5]}</div>
-          <div class="hist-time"><i class="ti ti-clock" style="font-size:13px"></i> ${r[6]} &rarr; ${r[7]} &nbsp;<strong>${parseFloat(r[8]).toFixed(2)} hrs</strong></div>
-        </div>
-        <span class="badge ${r[9]==='Approved'?'badge-appr':'badge-pend'}">${r[9]||'Pending'}</span>
-      </div>
-    </div>`).join('');
 }
 </script>
 </body>
