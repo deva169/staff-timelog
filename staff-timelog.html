@@ -39,6 +39,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px}
 .field input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--surface);color:var(--text)}
 .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,58,92,0.1)}
+.hint{font-size:12px;color:var(--text2);line-height:1.4;margin-top:6px}
 .btn{width:100%;padding:13px;border:none;border-radius:var(--r);font-size:15px;font-weight:600;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.1s}
 .btn:hover{opacity:0.87}.btn:active{transform:scale(0.98)}.btn:disabled{opacity:0.42;cursor:not-allowed;transform:none}
 .btn-ac{background:var(--accent);color:#fff}
@@ -138,7 +139,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
           <div class="field fullfield"><label>DOB</label><input id="rdob" type="date" autocomplete="bday"/></div>
           <div class="field fullfield"><label>Mobile number</label><input id="rmobile" type="tel" inputmode="tel" autocomplete="tel"/></div>
           <div class="field fullfield"><label>Email ID</label><input id="remail" type="email" autocomplete="email"/></div>
-          <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/></div>
+          <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/><div class="hint">Use any four digit pin to setup your login and remember for future login.</div></div>
         </div>
         <button class="btn btn-ac" onclick="doRegister()"><i class="ti ti-user-plus"></i> Register</button>
         <div class="login-actions"><button class="linkbtn" onclick="showLogin()">Back to sign in</button></div>
