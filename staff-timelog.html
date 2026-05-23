@@ -41,9 +41,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .btn-ac{background:var(--accent);color:#fff}
 .btn-gr{background:#0f6e56;color:#fff}
 .btn-or{background:var(--orange);color:#fff}
+.linkbtn{background:none;border:none;color:var(--accent);font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;padding:0}
+.login-actions{display:flex;justify-content:center;margin-top:14px}
 .btn-sm{background:none;border:1px solid var(--border);color:var(--text2);font-size:13px;padding:7px 14px;width:auto;font-family:var(--sans);cursor:pointer;border-radius:var(--r);display:flex;align-items:center;gap:6px}
 .btn-sm:hover{background:var(--bg)}
 .errmsg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
+.okmsg{font-size:13px;color:var(--green);margin-top:10px;text-align:center;line-height:1.45;min-height:18px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.fullfield{grid-column:1/-1}
 .mwrap{display:none}
 .tbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--border);background:#f9fafc}
 .tbar-l{display:flex;align-items:center;gap:10px}
@@ -91,7 +96,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 .spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:420px){body{padding:0}.card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}.clkd{font-size:42px}}
+@media(max-width:420px){body{padding:0}.card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}.clkd{font-size:42px}.formgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -110,7 +115,25 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
       <div class="field"><label>Login ID</label><input id="lid" type="text" placeholder="e.g. Deva" autocomplete="username"/></div>
       <div class="field"><label>PIN</label><input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password"/></div>
       <button class="btn btn-ac" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
+      <div class="login-actions"><button class="linkbtn" onclick="showRegister()">Register here</button></div>
       <p class="errmsg" id="lerr"></p>
+    </div>
+  </div>
+
+  <div id="regSec" style="display:none">
+    <div class="lbody">
+      <div class="lintro"><h2>Register new staff</h2><p>Create your staff login</p></div>
+      <div class="formgrid">
+        <div class="field"><label>First name</label><input id="rfname" type="text" autocomplete="given-name"/></div>
+        <div class="field"><label>Last name</label><input id="rlname" type="text" autocomplete="family-name"/></div>
+        <div class="field fullfield"><label>DOB</label><input id="rdob" type="date" autocomplete="bday"/></div>
+        <div class="field fullfield"><label>Email ID</label><input id="remail" type="email" autocomplete="email"/></div>
+        <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/></div>
+      </div>
+      <button class="btn btn-ac" onclick="doRegister()"><i class="ti ti-user-plus"></i> Register</button>
+      <div class="login-actions"><button class="linkbtn" onclick="showLogin()">Back to sign in</button></div>
+      <p class="errmsg" id="rerr"></p>
+      <p class="okmsg" id="rok"></p>
     </div>
   </div>
 
@@ -129,11 +152,6 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 var SCRIPT = 'https://script.google.com/macros/s/AKfycbxwZ-Xx7a6xcbS2RXBTKNwQf0XzozEUMUAxEOi79C3-b10xf2YCqPWy0w1PhuQHH_qA/exec';
-
-var USERS = {
-  deva: {pin:'1234', name:'Deva', initials:'DV'}
-  // Add more: sam: {pin:'5678', name:'Sam', initials:'SM'}
-};
 
 var LOCS = [
   {name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, r:1000},
@@ -154,21 +172,40 @@ var todayNice=function(){return new Date().toLocaleDateString('en-AU',{weekday:'
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function doLogin(){
+  if(busy) return;
   var id=document.getElementById('lid').value.trim().toLowerCase();
   var pin=document.getElementById('lpin').value.trim();
-  if(!USERS[id]||USERS[id].pin!==pin){
-    document.getElementById('lerr').textContent='Invalid login ID or PIN.';
-    document.getElementById('lpin').value='';return;
-  }
   document.getElementById('lerr').textContent='';
-  try{localStorage.setItem(SESSION_KEY,id);}catch(e){}
-  startSession(id);
+  if(!id||!pin){document.getElementById('lerr').textContent='Enter login ID and PIN.';return;}
+  busy=true;setLoginBtn(true);
+  apiFetch({action:'login',uid:id,pin:pin})
+  .then(function(data){
+    busy=false;setLoginBtn(false);
+    if(data.ok&&data.user){
+      document.getElementById('lpin').value='';
+      saveSession(data.user);
+      startSession(data.user);
+    } else if(data.error&&data.error.indexOf('Unknown action')>=0&&id==='deva'&&pin==='1234'){
+      var fallback={id:'deva',name:'Deva',initials:'DV'};
+      document.getElementById('lpin').value='';
+      saveSession(fallback);
+      startSession(fallback);
+    } else {
+      document.getElementById('lpin').value='';
+      document.getElementById('lerr').textContent=data.error||'Invalid login ID or PIN.';
+    }
+  })
+  .catch(function(e){
+    busy=false;setLoginBtn(false);
+    document.getElementById('lerr').textContent='Network error: '+e.message;
+  });
 }
 
-function startSession(id){
-  if(!USERS[id]) return;
-  user={id:id,name:USERS[id].name,initials:USERS[id].initials};
+function startSession(profile){
+  if(!profile||!profile.id) return;
+  user={id:String(profile.id).toLowerCase(),name:profile.name||profile.id,initials:profile.initials||makeInitials(profile.name||profile.id)};
   document.getElementById('loginSec').style.display='none';
+  document.getElementById('regSec').style.display='none';
   document.getElementById('mainSec').style.display='block';
   document.getElementById('avEl').textContent=user.initials;
   document.getElementById('gname').textContent='Hello, '+user.name;
@@ -182,15 +219,89 @@ function doLogout(){
   user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';cH=8;cM=0;
   try{localStorage.removeItem(SESSION_KEY);}catch(e){}
   document.getElementById('loginSec').style.display='block';
+  document.getElementById('regSec').style.display='none';
   document.getElementById('mainSec').style.display='none';
   document.getElementById('lid').value='';document.getElementById('lpin').value='';
   document.getElementById('mainBody').innerHTML='<div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading…</div>';
 }
 
 function restoreSession(){
-  var id='';
-  try{id=(localStorage.getItem(SESSION_KEY)||'').toLowerCase();}catch(e){}
-  if(id&&USERS[id]) startSession(id);
+  var profile=null;
+  try{profile=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');}catch(e){}
+  if(profile&&profile.id) startSession(profile);
+}
+
+function saveSession(profile){
+  try{localStorage.setItem(SESSION_KEY,JSON.stringify(profile));}catch(e){}
+}
+
+function showRegister(){
+  document.getElementById('loginSec').style.display='none';
+  document.getElementById('regSec').style.display='block';
+  document.getElementById('lerr').textContent='';
+}
+
+function showLogin(){
+  document.getElementById('regSec').style.display='none';
+  document.getElementById('loginSec').style.display='block';
+  document.getElementById('rerr').textContent='';
+  document.getElementById('rok').textContent='';
+}
+
+function doRegister(){
+  if(busy) return;
+  var first=document.getElementById('rfname').value.trim();
+  var last=document.getElementById('rlname').value.trim();
+  var dob=document.getElementById('rdob').value.trim();
+  var email=document.getElementById('remail').value.trim();
+  var pin=document.getElementById('rpin').value.trim();
+  document.getElementById('rerr').textContent='';
+  document.getElementById('rok').textContent='';
+  if(!first||!last||!dob||!email||!pin){document.getElementById('rerr').textContent='Please complete all fields.';return;}
+  if(!/^\d{4}$/.test(pin)){document.getElementById('rerr').textContent='PIN must be exactly 4 digits.';return;}
+
+  busy=true;setRegisterBtn(true);
+  apiFetch({action:'register',first:first,last:last,dob:dob,email:email,pin:pin})
+  .then(function(data){
+    busy=false;setRegisterBtn(false);
+    if(data.ok&&data.user){
+      document.getElementById('rok').textContent='Registered. Username: '+data.username;
+      document.getElementById('rpin').value='';
+      saveSession(data.user);
+      setTimeout(function(){startSession(data.user);},600);
+    } else {
+      document.getElementById('rerr').textContent=data.error||'Could not register staff.';
+    }
+  })
+  .catch(function(e){
+    busy=false;setRegisterBtn(false);
+    document.getElementById('rerr').textContent='Network error: '+e.message;
+  });
+}
+
+function apiFetch(params){
+  params.cb=Date.now();
+  var q=Object.keys(params).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(params[k]);}).join('&');
+  return fetch(SCRIPT+'?'+q).then(function(r){return r.json();});
+}
+
+function setLoginBtn(loading){
+  var b=document.querySelector('#loginSec .btn-ac');
+  if(!b) return;
+  b.disabled=loading;
+  b.innerHTML=loading?'<span class="spinner"></span> Signing in...':'<i class="ti ti-login"></i> Sign in';
+}
+
+function setRegisterBtn(loading){
+  var b=document.querySelector('#regSec .btn-ac');
+  if(!b) return;
+  b.disabled=loading;
+  b.innerHTML=loading?'<span class="spinner"></span> Registering...':'<i class="ti ti-user-plus"></i> Register';
+}
+
+function makeInitials(name){
+  var parts=String(name||'').trim().split(/\s+/);
+  return ((parts[0]||'S').charAt(0)+(parts[1]||'T').charAt(0)).toUpperCase();
 }
 
 // ── GPS ───────────────────────────────────────────────────────────────────────
