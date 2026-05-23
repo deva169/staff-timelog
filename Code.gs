@@ -30,7 +30,8 @@ function doGet(e) {
 }
 
 function getSheet() {
-  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss && SPREADSHEET_ID) ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sh = ss.getSheetByName(SHEET_NAME) || ss.getSheets()[0];
   ensureHeaders(sh);
   return sh;
