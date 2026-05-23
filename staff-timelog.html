@@ -124,7 +124,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-var SCRIPT = 'https://script.google.com/macros/s/AKfycbxo9X8_OzvGGEC8-g7DMm9Q92VBwxMqAIx8nzvrXCP6O1Pi3fVAr6adzwbfCmJak8zT/exec';
+var SCRIPT = 'https://script.google.com/macros/s/AKfycbx8H96C9FuM5oZaeooJl_DBHI04kUfCu9V7KARKN5GimUbZLM2UVj9C82qEBlNZvpbY/exec';
 
 var USERS = {
   deva: {pin:'1234', name:'Deva', initials:'DV'}
@@ -132,9 +132,9 @@ var USERS = {
 };
 
 var LOCS = [
-  {name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, r:300},
-  {name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, r:300},
-  {name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, r:300}
+  {name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, r:1000},
+  {name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, r:1000},
+  {name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, r:1000}
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -373,18 +373,20 @@ function submitStart(){
   .then(function(r){return r.json();})
   .then(function(data){
     busy=false;setBtn(false);
+    console.log('Clock-in response:',JSON.stringify(data));
     if(data.ok){
       var row=[entryId,user.id,user.name,loc,loc==='Others'?note:'',todayISO(),timeStr,'','','In Progress',new Date().toISOString()];
       openEntry=row;
       todayRows.push(row);
       render();
     } else {
-      showMsg('err','Error: '+(data.error||'unknown'));
+      showMsg('err','Sheet error: '+(data.error||'unknown'));
     }
   })
   .catch(function(e){
     busy=false;setBtn(false);
-    showMsg('err','Network error. Please try again.');
+    console.log('Clock-in fetch error:',e);
+    showMsg('err','Network error: '+e.message);
   });
 }
 
@@ -421,17 +423,19 @@ function submitFinish(){
   .then(function(r){return r.json();})
   .then(function(data){
     busy=false;setBtn(false);
+    console.log('Clock-out response:',JSON.stringify(data));
     if(data.ok){
       openEntry[7]=timeStr;openEntry[8]=dur;openEntry[9]='Complete';
       openEntry=null;
       render();
     } else {
-      showMsg('err','Error: '+(data.error||'unknown'));
+      showMsg('err','Sheet error: '+(data.error||'unknown'));
     }
   })
   .catch(function(e){
     busy=false;setBtn(false);
-    showMsg('err','Network error. Please try again.');
+    console.log('Clock-out fetch error:',e);
+    showMsg('err','Network error: '+e.message);
   });
 }
 
