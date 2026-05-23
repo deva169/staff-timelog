@@ -59,6 +59,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .ls{font-size:12px;color:var(--text2);margin-top:2px}
 .locbox.oth{border-color:#f9a87a;background:var(--orange-lt)}
 .locbox.oth i{color:var(--orange)}
+.locrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.locrow .slbl{margin-bottom:0}
+.locrefresh{width:auto;padding:6px 10px;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--text2);border-radius:var(--r);display:flex;align-items:center;gap:5px;cursor:pointer;font-family:var(--sans)}
+.locrefresh:hover{background:var(--bg)}
 textarea.notes{width:100%;padding:10px 13px;margin-top:10px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);background:var(--surface);color:var(--text);resize:vertical;min-height:80px}
 textarea.notes:focus{outline:none;border-color:var(--accent)}
 .datebox{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;font-size:15px}
@@ -139,7 +143,7 @@ var LOCS = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 var user=null, detLoc=null, todayRows=[], openEntry=null;
-var cH=8, cM=0, busy=false;
+var cH=8, cM=0, busy=false, geoBusy=false, geoMsg='';
 
 var pad=function(n){return String(n).padStart(2,'0');};
 var toM=function(h,m){return h*60+m;};
@@ -168,7 +172,7 @@ document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document
 document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin();};
 
 function doLogout(){
-  user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;cH=8;cM=0;
+  user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';cH=8;cM=0;
   document.getElementById('loginSec').style.display='block';
   document.getElementById('mainSec').style.display='none';
   document.getElementById('lid').value='';document.getElementById('lpin').value='';
@@ -177,20 +181,51 @@ function doLogout(){
 
 // ── GPS ───────────────────────────────────────────────────────────────────────
 function detectGeoThenLoad(){
-  if(!navigator.geolocation){detLoc='Others';loadSheet();return;}
+  refreshLocation(loadSheet);
+}
+
+function refreshLocation(done){
+  geoBusy=true;geoMsg='Checking GPS...';
+  if(!navigator.geolocation){
+    detLoc='Others';geoBusy=false;geoMsg='GPS is not available on this browser.';
+    if(done) done();
+    return;
+  }
   navigator.geolocation.getCurrentPosition(
     function(pos){
-      var lat=pos.coords.latitude,lon=pos.coords.longitude,best=null,bestD=Infinity;
-      LOCS.forEach(function(g){
-        var dx=(lat-g.lat)*111000,dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<g.r&&d<bestD){bestD=d;best=g;}
-      });
-      detLoc=best?best.name:'Others';loadSheet();
+      detLoc=matchLocation(pos.coords.latitude,pos.coords.longitude);
+      geoBusy=false;geoMsg=detLoc==='Others'?'Not near a registered site.':'Detected via GPS.';
+      if(done) done();
     },
-    function(){detLoc='Others';loadSheet();},
-    {timeout:7000,maximumAge:60000}
+    function(err){
+      detLoc='Others';geoBusy=false;
+      geoMsg=err&&err.code===1?'Location permission is blocked.':'Could not get a fresh GPS location.';
+      if(done) done();
+    },
+    {enableHighAccuracy:true,timeout:15000,maximumAge:0}
   );
+}
+
+function matchLocation(lat,lon){
+  var best=null,bestD=Infinity;
+  LOCS.forEach(function(g){
+    var dx=(lat-g.lat)*111000,dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
+    var d=Math.sqrt(dx*dx+dy*dy);
+    if(d<g.r&&d<bestD){bestD=d;best=g;}
+  });
+  return best?best.name:'Others';
+}
+
+function refreshLocationView(){
+  if(busy||geoBusy) return;
+  var noteEl=document.getElementById('otherNote');
+  var oldNote=noteEl?noteEl.value:'';
+  geoBusy=true;geoMsg='Checking GPS...';render();
+  refreshLocation(function(){
+    render();
+    var nextNote=document.getElementById('otherNote');
+    if(nextNote) nextNote.value=oldNote;
+  });
 }
 
 // ── LOAD SHEET ────────────────────────────────────────────────────────────────
@@ -285,12 +320,13 @@ function render(){
       '<p class="msg" id="subMsg"></p>';
   } else {
     // CLOCK-IN view
+    var locSub=geoBusy?'Checking GPS...':(geoMsg||'Detected via GPS');
     var locHtml=detLoc&&detLoc!=='Others'
-      ?'<div class="locbox"><i class="ti ti-map-pin"></i><div><div class="ln">'+detLoc+'</div><div class="ls"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>'
-      :'<div class="locbox oth"><i class="ti ti-map-pin"></i><div><div class="ln">Other Location</div><div class="ls">Not near a registered site</div></div></div>'+
+      ?'<div class="locbox"><i class="ti ti-map-pin"></i><div><div class="ln">'+detLoc+'</div><div class="ls"><i class="ti ti-satellite" style="font-size:11px"></i> '+locSub+'</div></div></div>'
+      :'<div class="locbox oth"><i class="ti ti-map-pin"></i><div><div class="ln">Other Location</div><div class="ls">'+(geoBusy?'Checking GPS...':(geoMsg||'Not near a registered site'))+'</div></div></div>'+
        '<textarea class="notes" id="otherNote" placeholder="Enter location — e.g. Diwali Mela stall at Perth City"></textarea>';
     html+=
-      '<div class="slbl">Location</div>'+locHtml+
+      '<div class="locrow"><div class="slbl">Location</div><button class="locrefresh" onclick="refreshLocationView()" '+(geoBusy?'disabled':'')+'><i class="ti ti-refresh"></i> Refresh</button></div>'+locHtml+
       '<div class="div"></div>'+
       '<div class="slbl">Date</div>'+
       '<div class="datebox"><i class="ti ti-calendar-event"></i><span>'+todayNice()+'</span></div>'+
@@ -347,14 +383,27 @@ function submitStart(){
   if(busy) return;
   var noteEl=document.getElementById('otherNote');
   var note=noteEl?noteEl.value.trim():'';
-  var loc=detLoc||'Others';
-  if(loc==='Others'&&!note){showMsg('err','Please enter the location details.');return;}
 
   var timeStr=pad(cH)+':'+pad(cM);
   if(hasOverlap(s2m(timeStr),-1)){showMsg('err','You already have an active shift. Please clock out first.');return;}
 
-  busy=true;setBtn(true);
+  busy=true;setBtn(true,'Checking GPS...');
+  refreshLocation(function(){
+    var loc=detLoc||'Others';
+    if(loc==='Others'&&!note){
+      busy=false;setBtn(false);
+      render();
+      var nextNote=document.getElementById('otherNote');
+      if(nextNote) nextNote.value=note;
+      showMsg('err','Please enter the location details.');
+      return;
+    }
+    saveStart(loc,note,timeStr);
+  });
+}
 
+function saveStart(loc,note,timeStr){
+  setBtn(true,'Saving...');
   var entryId=String(Date.now());
   var params=[
     'action=append',
@@ -378,7 +427,7 @@ function submitStart(){
       var row=[entryId,user.id,user.name,loc,loc==='Others'?note:'',todayISO(),timeStr,'','','In Progress',new Date().toISOString()];
       openEntry=row;
       todayRows.push(row);
-      render();
+      loadSheet();
     } else {
       showMsg('err','Sheet error: '+(data.error||'unknown'));
     }
@@ -427,7 +476,7 @@ function submitFinish(){
     if(data.ok){
       openEntry[7]=timeStr;openEntry[8]=dur;openEntry[9]='Complete';
       openEntry=null;
-      render();
+      loadSheet();
     } else {
       showMsg('err','Sheet error: '+(data.error||'unknown'));
     }
@@ -439,11 +488,12 @@ function submitFinish(){
   });
 }
 
-function setBtn(loading){
+function setBtn(loading,text){
   var b=document.getElementById('subBtn');
   if(!b) return;
   b.disabled=loading;
-  if(loading) b.innerHTML='<span class="spinner"></span> Saving…';
+  if(loading) b.innerHTML='<span class="spinner"></span> '+(text||'Saving...');
+  else b.innerHTML=openEntry?'<i class="ti ti-player-stop"></i> Clock out':'<i class="ti ti-player-play"></i> Clock in';
 }
 function showMsg(type,text){
   var el=document.getElementById('subMsg');
