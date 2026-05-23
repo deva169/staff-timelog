@@ -124,7 +124,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────────
-var SCRIPT = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
+var SCRIPT = 'https://script.google.com/macros/s/AKfycbxo9X8_OzvGGEC8-g7DMm9Q92VBwxMqAIx8nzvrXCP6O1Pi3fVAr6adzwbfCmJak8zT/exec';
 
 var USERS = {
   deva: {pin:'1234', name:'Deva', initials:'DV'}
@@ -143,7 +143,7 @@ var cH=8, cM=0, busy=false;
 
 var pad=function(n){return String(n).padStart(2,'0');};
 var toM=function(h,m){return h*60+m;};
-var s2m=function(s){var p=(s||'0:0').toString().split(':');return parseInt(p[0]||0)*60+parseInt(p[1]||0);};
+var s2m=function(s){var p=(s||'0:0').toString().trim().split(':');return parseInt(p[0]||0)*60+parseInt(p[1]||0);};
 var todayISO=function(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
 var todayNice=function(){return new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
 
@@ -202,14 +202,39 @@ function loadSheet(){
     todayRows=[];openEntry=null;
     if(data.ok&&Array.isArray(data.rows)){
       var today=todayISO();
+
+      // Collect all of today's rows
+      var allToday=[];
       data.rows.forEach(function(r){
-        var rd=String(r[5]).trim();
-        // Only include rows where date exactly matches today
-        if(rd===today){
+        if(String(r[5]).trim()===today) allToday.push(r);
+      });
+
+      // Build set of start times that have a corresponding complete entry
+      // This handles duplicate/stuck rows from earlier bugs
+      var completedStartTimes={};
+      allToday.forEach(function(r){
+        var hasFinish=r[7]&&String(r[7]).trim()!=='';
+        if(hasFinish) completedStartTimes[String(r[6]).trim()]=true;
+      });
+
+      // Only keep rows that are valid:
+      // - Complete rows always kept
+      // - Open rows only kept if their start time does NOT already have a completed version
+      allToday.forEach(function(r){
+        var hasStart =r[6]&&String(r[6]).trim()!=='';
+        var hasFinish=r[7]&&String(r[7]).trim()!=='';
+        if(!hasStart) return; // skip empty rows
+        if(hasFinish){
+          // Complete entry — always include
           todayRows.push(r);
-          var hasStart=r[6]&&String(r[6]).trim()!=='';
-          var hasFinish=r[7]&&String(r[7]).trim()!=='';
-          if(hasStart&&!hasFinish&&!openEntry) openEntry=r;
+        } else {
+          // Open entry — only include if no completed entry exists with same start time
+          var startKey=String(r[6]).trim();
+          if(!completedStartTimes[startKey]){
+            todayRows.push(r);
+            if(!openEntry) openEntry=r;
+          }
+          // else: this is a stale/duplicate open row — skip it
         }
       });
     }
