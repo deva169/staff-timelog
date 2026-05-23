@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <title>Staff Time Log — A2B Stores</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
@@ -50,6 +53,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .userconfirm{display:none;margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;text-align:center}
 .userconfirm .ulabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--text3);margin-bottom:5px}
 .userconfirm .uname{font-size:24px;font-family:var(--mono);font-weight:500;color:var(--accent);margin-bottom:12px;word-break:break-word}
+.usernotice{display:none;margin:0 1.75rem 1rem;padding:11px 13px;border:1px solid rgba(15,110,86,0.25);border-radius:var(--r);background:var(--green-lt);color:var(--green);font-size:13px;font-weight:600;text-align:center}
 .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .fullfield{grid-column:1/-1}
 .mwrap{display:none}
@@ -154,6 +158,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
       </div>
       <button class="btn-sm" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
+    <div class="usernotice" id="userNotice"></div>
     <div id="mainBody"><div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading…</div></div>
   </div>
 </div>
@@ -170,6 +175,7 @@ var LOCS = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 var SESSION_KEY='staffTimelogUserId';
+var NEW_USER_KEY='staffTimelogNewUsername';
 var pendingRegisteredUser=null;
 var user=null, detLoc=null, todayRows=[], openEntry=null;
 var cH=8, cM=0, busy=false, geoBusy=false, geoMsg='';
@@ -221,6 +227,7 @@ function startSession(profile){
   document.getElementById('gname').textContent='Hello, '+user.name;
   document.getElementById('tday').textContent=todayNice();
   document.getElementById('uidEl').textContent='Username: '+user.id;
+  showUsernameNotice();
   detectGeoThenLoad();
 }
 document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document.getElementById('lpin').focus();};
@@ -229,6 +236,7 @@ document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin
 function doLogout(){
   user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';cH=8;cM=0;
   try{localStorage.removeItem(SESSION_KEY);}catch(e){}
+  try{sessionStorage.removeItem(NEW_USER_KEY);}catch(e){}
   document.getElementById('loginSec').style.display='block';
   document.getElementById('regSec').style.display='none';
   document.getElementById('mainSec').style.display='none';
@@ -282,6 +290,7 @@ function doRegister(){
     busy=false;setRegisterBtn(false);
     if(data.ok&&data.user){
       pendingRegisteredUser=data.user;
+      try{sessionStorage.setItem(NEW_USER_KEY,data.username||data.user.id);}catch(e){}
       document.getElementById('rok').textContent='Registration complete. Keep this username for future sign in.';
       document.getElementById('regUserName').textContent=data.username||data.user.id;
       document.getElementById('regConfirm').style.display='block';
@@ -301,6 +310,20 @@ function continueAfterRegister(){
   saveSession(pendingRegisteredUser);
   startSession(pendingRegisteredUser);
   pendingRegisteredUser=null;
+}
+
+function showUsernameNotice(){
+  var justRegistered='';
+  try{justRegistered=sessionStorage.getItem(NEW_USER_KEY)||'';}catch(e){}
+  var el=document.getElementById('userNotice');
+  if(!el) return;
+  if(justRegistered){
+    el.textContent='Your username is '+justRegistered+'. Keep it for future sign in.';
+    el.style.display='block';
+  } else {
+    el.textContent='';
+    el.style.display='none';
+  }
 }
 
 function apiFetch(params){
