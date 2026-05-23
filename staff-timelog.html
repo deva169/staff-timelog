@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Staff Time Log — A2B Stores</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -20,314 +20,292 @@
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem 4rem}
 .card{background:var(--surface);border-radius:var(--rl);border:1px solid var(--border);width:100%;max-width:460px;overflow:hidden}
-.app-header{background:var(--accent);padding:1.4rem 1.75rem;display:flex;align-items:center;justify-content:space-between}
-.app-header-left{display:flex;align-items:center;gap:12px}
-.app-logo{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
-.app-logo i{font-size:22px;color:#fff}
-.app-title{font-size:16px;font-weight:600;color:#fff}
-.app-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px}
-.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.12);padding:4px 10px;border-radius:20px}
-.live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
-.login-body{padding:2rem 1.75rem}
-.login-intro{text-align:center;margin-bottom:1.75rem}
-.login-intro h2{font-size:20px;font-weight:600}
-.login-intro p{font-size:13px;color:var(--text2);margin-top:4px}
+.hdr{background:var(--accent);padding:1.4rem 1.75rem;display:flex;align-items:center;justify-content:space-between}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo i{font-size:22px;color:#fff}
+.htitle{font-size:16px;font-weight:600;color:#fff}
+.hsub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px}
+.live{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.12);padding:4px 10px;border-radius:20px}
+.ldot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
+/* login */
+.lbody{padding:2rem 1.75rem}
+.lintro{text-align:center;margin-bottom:1.75rem}
+.lintro h2{font-size:20px;font-weight:600}
+.lintro p{font-size:13px;color:var(--text2);margin-top:4px}
 .field{margin-bottom:1.1rem}
 .field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px}
-.field input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--surface);color:var(--text);transition:border-color 0.15s,box-shadow 0.15s}
+.field input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--surface);color:var(--text)}
 .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,58,92,0.1)}
 .btn{width:100%;padding:13px;border:none;border-radius:var(--r);font-size:15px;font-weight:600;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.1s}
-.btn:hover{opacity:0.87}
-.btn:active{transform:scale(0.98)}
-.btn:disabled{opacity:0.42;cursor:not-allowed;transform:none}
-.btn-accent{background:var(--accent);color:#fff}
-.btn-green{background:#0f6e56;color:#fff}
-.btn-orange{background:var(--orange);color:#fff}
+.btn:hover{opacity:0.87}.btn:active{transform:scale(0.98)}.btn:disabled{opacity:0.42;cursor:not-allowed;transform:none}
+.btn-ac{background:var(--accent);color:#fff}
+.btn-gr{background:#0f6e56;color:#fff}
+.btn-or{background:var(--orange);color:#fff}
 .btn-sm{background:none;border:1px solid var(--border);color:var(--text2);font-size:13px;padding:7px 14px;width:auto;font-family:var(--sans);cursor:pointer;border-radius:var(--r);display:flex;align-items:center;gap:6px}
 .btn-sm:hover{background:var(--bg)}
-.err-msg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
-.main-wrap{display:none}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--border);background:#f9fafc}
-.topbar-l{display:flex;align-items:center;gap:10px}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.topbar-name{font-size:14px;font-weight:600}
-.topbar-sub{font-size:12px;color:var(--text2);margin-top:1px}
+.errmsg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
+/* main */
+.mwrap{display:none}
+.tbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--border);background:#f9fafc}
+.tbar-l{display:flex;align-items:center;gap:10px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tname{font-size:14px;font-weight:600}
+.tsub{font-size:12px;color:var(--text2);margin-top:1px}
 .mbody{padding:1.5rem 1.75rem}
 .slbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);margin-bottom:10px}
 .div{height:1px;background:var(--border);margin:1.25rem 0}
-.loc-box{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc}
-.loc-box i{font-size:22px;color:var(--accent);flex-shrink:0}
-.loc-box .ln{font-size:15px;font-weight:600}
-.loc-box .ls{font-size:12px;color:var(--text2);margin-top:2px}
-.loc-box.oth{border-color:#f9a87a;background:var(--orange-lt)}
-.loc-box.oth i{color:var(--orange)}
+/* location */
+.locbox{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc}
+.locbox i{font-size:22px;color:var(--accent);flex-shrink:0}
+.ln{font-size:15px;font-weight:600}
+.ls{font-size:12px;color:var(--text2);margin-top:2px}
+.locbox.oth{border-color:#f9a87a;background:var(--orange-lt)}
+.locbox.oth i{color:var(--orange)}
 textarea.notes{width:100%;padding:10px 13px;margin-top:10px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);background:var(--surface);color:var(--text);resize:vertical;min-height:80px}
 textarea.notes:focus{outline:none;border-color:var(--accent)}
-.date-box{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;font-size:15px}
-.date-box i{color:var(--text3);font-size:18px}
-.clk-card{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
-.clk-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
-.clk-disp{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
-.clk-ctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
+/* date */
+.datebox{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;font-size:15px}
+.datebox i{color:var(--text3);font-size:18px}
+/* clock */
+.clkcard{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
+.clklbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
+.clkd{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
+.clkctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
 .tp{display:flex;flex-direction:column;align-items:center;gap:6px}
 .col{font-size:22px;color:var(--text3);font-weight:500;padding-bottom:4px}
 .adj{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;user-select:none;-webkit-user-select:none}
 .adj:hover{background:var(--accent-lt);color:var(--accent);border-color:rgba(26,58,92,0.3)}
 .adj:active{transform:scale(0.88)}
-.ci-card{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
-.ci-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:6px}
-.ci-time{font-size:40px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:4px;line-height:1}
-.ci-loc{font-size:12px;color:var(--orange);margin-top:6px;font-weight:500}
-.dur{text-align:center;font-size:13px;color:var(--text2);margin-top:10px;margin-bottom:1.25rem;min-height:20px}
+/* clocked in card */
+.cicard{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
+.cilbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:6px}
+.citime{font-size:40px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:4px;line-height:1}
+.ciloc{font-size:12px;color:var(--orange);margin-top:6px;font-weight:500}
+/* today's entries list */
+.entries-wrap{margin-bottom:1.25rem}
+.entry-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;background:#f9fafc}
+.entry-times{font-size:15px;font-weight:500;font-family:var(--mono);color:var(--accent)}
+.entry-loc{font-size:12px;color:var(--text2);margin-top:2px}
+.badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;flex-shrink:0}
+.badge-done{background:var(--green-lt);color:var(--green)}
+.badge-prog{background:var(--orange-lt);color:var(--orange)}
+/* done card inside list */
+.done-inline{background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:14px 16px;text-align:center;margin-bottom:1.25rem}
+.done-inline i{font-size:28px;color:var(--green);margin-bottom:6px;display:block}
+.done-inline .dt{font-size:28px;font-weight:500;font-family:var(--mono);color:var(--green);letter-spacing:2px}
+.done-inline .dl{font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px}
 .msg{margin-top:12px;font-size:13px;text-align:center;line-height:1.5;min-height:20px}
-.msg.ok{color:var(--green)}
-.msg.err{color:var(--red)}
-.done-wrap{text-align:center;padding:2rem 0.5rem}
-.done-icon{width:68px;height:68px;background:var(--green-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
-.done-icon i{font-size:36px;color:var(--green)}
-.done-card{background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:20px;margin-top:1.25rem;text-align:center}
-.done-loc{font-size:13px;font-weight:600;color:var(--green);margin-bottom:10px}
-.done-time{font-size:32px;font-weight:500;font-family:var(--mono);color:var(--green);letter-spacing:2px}
-.done-hrs{font-size:24px;font-weight:600;color:var(--green);margin-top:8px}
+.msg.ok{color:var(--green)}.msg.err{color:var(--red)}
 .loading{padding:3rem 1.75rem;text-align:center;color:var(--text2);font-size:14px}
 .loading i{font-size:32px;color:var(--text3);margin-bottom:12px;display:block}
 .spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-.app-footer{text-align:center;padding:1rem;font-size:11px;color:var(--text3);border-top:1px solid var(--border)}
-@media(max-width:420px){
-  body{padding:0}
-  .card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}
-  .clk-disp{font-size:42px}
-}
+@media(max-width:420px){body{padding:0}.card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}.clkd{font-size:42px}}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="app-header">
-    <div class="app-header-left">
-      <div class="app-logo"><i class="ti ti-clock-hour-4"></i></div>
-      <div><div class="app-title">Staff Time Log</div><div class="app-sub">A2B Stores &amp; Warehouse</div></div>
+  <div class="hdr">
+    <div class="hdr-l">
+      <div class="logo"><i class="ti ti-clock-hour-4"></i></div>
+      <div><div class="htitle">Staff Time Log</div><div class="hsub">A2B Stores &amp; Warehouse</div></div>
     </div>
-    <div class="live-badge"><span class="live-dot"></span>Live</div>
+    <div class="live"><span class="ldot"></span>Live</div>
   </div>
 
   <!-- LOGIN -->
-  <div id="loginSection">
-    <div class="login-body">
-      <div class="login-intro"><h2>Sign in to log hours</h2><p>Enter your login ID and PIN</p></div>
-      <div class="field"><label>Login ID</label><input id="lid" type="text" placeholder="e.g. Deva" autocomplete="username" /></div>
-      <div class="field"><label>PIN</label><input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password" /></div>
-      <button class="btn btn-accent" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
-      <p class="err-msg" id="loginErr"></p>
+  <div id="loginSec">
+    <div class="lbody">
+      <div class="lintro"><h2>Sign in to log hours</h2><p>Enter your login ID and PIN</p></div>
+      <div class="field"><label>Login ID</label><input id="lid" type="text" placeholder="e.g. Deva" autocomplete="username"/></div>
+      <div class="field"><label>PIN</label><input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password"/></div>
+      <button class="btn btn-ac" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
+      <p class="errmsg" id="lerr"></p>
     </div>
   </div>
 
   <!-- MAIN -->
-  <div class="main-wrap" id="mainSection">
-    <div class="topbar">
-      <div class="topbar-l">
-        <div class="avatar" id="avEl">DV</div>
-        <div><div class="topbar-name" id="gName"></div><div class="topbar-sub" id="todayStr"></div></div>
+  <div class="mwrap" id="mainSec">
+    <div class="tbar">
+      <div class="tbar-l">
+        <div class="av" id="avEl">DV</div>
+        <div><div class="tname" id="gname"></div><div class="tsub" id="tday"></div></div>
       </div>
       <button class="btn-sm" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
-    <div id="mainBody"><div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading shift status…</div></div>
+    <div id="mainBody"><div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading…</div></div>
   </div>
-
-  <div class="app-footer">A2B Stores Staff Portal</div>
 </div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────────────────
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
+var SCRIPT = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
 
 var USERS = {
-  deva: { pin:'1234', name:'Deva', initials:'DV' }
-  // Add staff: sam: { pin:'5678', name:'Sam', initials:'SM' }
+  deva: {pin:'1234', name:'Deva', initials:'DV'}
 };
 
 var LOCS = [
-  { name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, radius:300 },
-  { name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, radius:300 },
-  { name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, radius:300 }
+  {name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, r:300},
+  {name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, r:300},
+  {name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, r:300}
 ];
-// ─────────────────────────────────────────────────────────────────────────────
 
-var user      = null;
-var openEntry = null;   // today's row with start but no finish
-var detLoc    = null;   // GPS-detected location name or 'Others'
-var cH=8, cM=0;
-var busy=false;
+var user=null, detLoc=null, todayRows=[], openEntry=null;
+var cH=8, cM=0, busy=false;
 
-function pad(n){ return String(n).padStart(2,'0'); }
-function toMins(h,m){ return h*60+m; }
-function s2m(s){ var p=(s||'00:00').split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); }
-
-function todayISO(){
-  var d=new Date();
-  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
-}
-function todayNice(){
-  return new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-}
+var pad=function(n){return String(n).padStart(2,'0');};
+var toM=function(h,m){return h*60+m;};
+var s2m=function(s){var p=(s||'0:0').toString().split(':');return parseInt(p[0]||0)*60+parseInt(p[1]||0);};
+var todayISO=function(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
+var todayNice=function(){return new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function doLogin(){
-  var id  = document.getElementById('lid').value.trim().toLowerCase();
-  var pin = document.getElementById('lpin').value.trim();
-  var err = document.getElementById('loginErr');
+  var id=document.getElementById('lid').value.trim().toLowerCase();
+  var pin=document.getElementById('lpin').value.trim();
   if(!USERS[id]||USERS[id].pin!==pin){
-    err.textContent='Invalid login ID or PIN.';
-    document.getElementById('lpin').value='';
-    return;
+    document.getElementById('lerr').textContent='Invalid login ID or PIN.';
+    document.getElementById('lpin').value=''; return;
   }
-  err.textContent='';
+  document.getElementById('lerr').textContent='';
   user={id:id,name:USERS[id].name,initials:USERS[id].initials};
-  document.getElementById('loginSection').style.display='none';
-  document.getElementById('mainSection').style.display='block';
+  document.getElementById('loginSec').style.display='none';
+  document.getElementById('mainSec').style.display='block';
   document.getElementById('avEl').textContent=user.initials;
-  document.getElementById('gName').textContent='Hello, '+user.name;
-  document.getElementById('todayStr').textContent=todayNice();
+  document.getElementById('gname').textContent='Hello, '+user.name;
+  document.getElementById('tday').textContent=todayNice();
   detectGeoThenLoad();
 }
 document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document.getElementById('lpin').focus();};
 document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin();};
 
 function doLogout(){
-  user=null; openEntry=null; detLoc=null; busy=false;
-  document.getElementById('loginSection').style.display='block';
-  document.getElementById('mainSection').style.display='none';
-  document.getElementById('lid').value='';
-  document.getElementById('lpin').value='';
-  document.getElementById('mainBody').innerHTML='<div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading shift status…</div>';
+  user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;
+  document.getElementById('loginSec').style.display='block';
+  document.getElementById('mainSec').style.display='none';
+  document.getElementById('lid').value='';document.getElementById('lpin').value='';
+  document.getElementById('mainBody').innerHTML='<div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading…</div>';
 }
 
 // ── GPS ───────────────────────────────────────────────────────────────────────
 function detectGeoThenLoad(){
-  if(!navigator.geolocation){ detLoc='Others'; loadSheet(); return; }
+  if(!navigator.geolocation){detLoc='Others';loadSheet();return;}
   navigator.geolocation.getCurrentPosition(
     function(pos){
-      var lat=pos.coords.latitude, lon=pos.coords.longitude;
-      var best=null, bestD=Infinity;
+      var lat=pos.coords.latitude,lon=pos.coords.longitude,best=null,bestD=Infinity;
       LOCS.forEach(function(g){
-        var dx=(lat-g.lat)*111000, dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<g.radius&&d<bestD){bestD=d;best=g;}
+        var dx=(lat-g.lat)*111000,dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180),d=Math.sqrt(dx*dx+dy*dy);
+        if(d<g.r&&d<bestD){bestD=d;best=g;}
       });
-      detLoc=best?best.name:'Others';
-      loadSheet();
+      detLoc=best?best.name:'Others';loadSheet();
     },
-    function(){ detLoc='Others'; loadSheet(); },
+    function(){detLoc='Others';loadSheet();},
     {timeout:7000,maximumAge:60000}
   );
 }
 
 // ── LOAD SHEET ────────────────────────────────────────────────────────────────
 function loadSheet(){
-  var url=SCRIPT_URL+'?action=get&userId='+encodeURIComponent(user.id)+'&cb='+Date.now();
+  var url=SCRIPT+'?action=get&userId='+encodeURIComponent(user.id)+'&cb='+Date.now();
   fetch(url)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if(data.ok && Array.isArray(data.rows)){
-        var today=todayISO();
-        // Find today's complete entry (has both start and finish)
-        var done=null, open=null;
-        data.rows.forEach(function(r){
-          var rowDate = String(r[5]).trim();
-          // Handle possible date formats from sheet
-          if(rowDate===today || rowDate.startsWith(today)){
-            var hasStart  = r[6] && String(r[6]).trim()!=='' && String(r[6]).trim()!=='0';
-            var hasFinish = r[7] && String(r[7]).trim()!=='' && String(r[7]).trim()!=='0';
-            if(hasStart && hasFinish && !done) done=r;
-            else if(hasStart && !hasFinish && !open) open=r;
+  .then(function(r){return r.json();})
+  .then(function(data){
+    todayRows=[];openEntry=null;
+    if(data.ok&&Array.isArray(data.rows)){
+      var today=todayISO();
+      data.rows.forEach(function(r){
+        var rd=String(r[5]).trim();
+        if(rd===today||rd.startsWith(today)){
+          todayRows.push(r);
+          // open = has start, no finish
+          if(r[6]&&String(r[6]).trim()&&(!r[7]||!String(r[7]).trim())&&!openEntry){
+            openEntry=r;
           }
-        });
-        if(done){ renderDone(done); return; }
-        if(open){ openEntry=open; renderFinish(); return; }
-      }
-      renderStart();
-    })
-    .catch(function(){ renderStart(); });
+        }
+      });
+    }
+    render();
+  })
+  .catch(function(){render();});
 }
 
-// ── RENDER: CLOCK-IN ─────────────────────────────────────────────────────────
-function renderStart(){
-  openEntry=null;
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
   var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
-  var locHtml = detLoc && detLoc!=='Others'
-    ? '<div class="loc-box"><i class="ti ti-map-pin"></i><div><div class="ln">'+detLoc+'</div><div class="ls"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>'
-    : '<div class="loc-box oth"><i class="ti ti-map-pin"></i><div><div class="ln">Other Location</div><div class="ls">Not near a registered site</div></div></div><textarea class="notes" id="otherNote" placeholder="Enter location — e.g. Diwali Mela stall at Perth City"></textarea>';
 
-  document.getElementById('mainBody').innerHTML=
-    '<div class="mbody">'+
-    '<div class="slbl">Location</div>'+locHtml+
-    '<div class="div"></div>'+
-    '<div class="slbl">Date</div>'+
-    '<div class="date-box"><i class="ti ti-calendar-event"></i><span>'+todayNice()+'</span></div>'+
-    '<div class="div"></div>'+
-    '<div class="slbl">Start time</div>'+
-    '<div class="clk-card">'+
-    '<div class="clk-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start time</div>'+
-    '<div class="clk-disp" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
-    '<div class="clk-ctrl">'+
-    '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
-    '<div class="col">:</div>'+
-    '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
-    '</div></div>'+
-    '<div class="div"></div>'+
-    '<button class="btn btn-green" id="subBtn" onclick="submitStart()"><i class="ti ti-player-play"></i> Clock in</button>'+
-    '<p class="msg" id="subMsg"></p>'+
-    '</div>';
+  var html='<div class="mbody">';
+
+  // --- Today's completed entries list (if any) ---
+  var completed=todayRows.filter(function(r){return r[7]&&String(r[7]).trim();});
+  if(completed.length>0){
+    html+='<div class="slbl">Today\'s shifts</div><div class="entries-wrap">';
+    completed.forEach(function(r){
+      html+='<div class="entry-row">'+
+        '<div>'+
+          '<div class="entry-times">'+String(r[6])+' → '+String(r[7])+'</div>'+
+          '<div class="entry-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> '+String(r[3])+'</div>'+
+        '</div>'+
+        '<span class="badge badge-done">Done</span>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+
+  // --- If there's an open (clocked-in) entry, show clock-out ---
+  if(openEntry){
+    var st=String(openEntry[6]).trim();
+    var loc=String(openEntry[3]).trim();
+    var note=openEntry[4]?String(openEntry[4]).trim():'';
+    html+=
+      '<div class="cicard">'+
+        '<div class="cilbl"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>'+
+        '<div class="citime">'+st+'</div>'+
+        '<div class="ciloc"><i class="ti ti-map-pin" style="font-size:11px"></i> '+loc+(note?' — '+note:'')+'</div>'+
+      '</div>'+
+      '<div class="slbl">Finish time</div>'+
+      clockHTML()+
+      '<div class="div" style="margin-top:1.25rem"></div>'+
+      '<button class="btn btn-or" id="subBtn" onclick="submitFinish()"><i class="ti ti-player-stop"></i> Clock out</button>'+
+      '<p class="msg" id="subMsg"></p>';
+  } else {
+    // --- Clock-in form ---
+    var locHtml=detLoc&&detLoc!=='Others'
+      ?'<div class="locbox"><i class="ti ti-map-pin"></i><div><div class="ln">'+detLoc+'</div><div class="ls"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>'
+      :'<div class="locbox oth"><i class="ti ti-map-pin"></i><div><div class="ln">Other Location</div><div class="ls">Not near a registered site</div></div></div>'+
+       '<textarea class="notes" id="otherNote" placeholder="Enter location — e.g. Diwali Mela stall at Perth City"></textarea>';
+
+    html+=
+      (completed.length>0?'':'')+ // spacer if needed
+      '<div class="slbl">Location</div>'+locHtml+
+      '<div class="div"></div>'+
+      '<div class="slbl">Date</div>'+
+      '<div class="datebox"><i class="ti ti-calendar-event"></i><span>'+todayNice()+'</span></div>'+
+      '<div class="div"></div>'+
+      '<div class="slbl">Start time</div>'+
+      clockHTML()+
+      '<div class="div"></div>'+
+      '<button class="btn btn-gr" id="subBtn" onclick="submitStart()"><i class="ti ti-player-play"></i> Clock in</button>'+
+      '<p class="msg" id="subMsg"></p>';
+  }
+
+  html+='</div>';
+  document.getElementById('mainBody').innerHTML=html;
+  if(openEntry) updDur();
 }
 
-// ── RENDER: CLOCK-OUT ────────────────────────────────────────────────────────
-function renderFinish(){
-  var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
-  var startTime=String(openEntry[6]).trim();
-  var locName=String(openEntry[3]).trim();
-  var locNote=openEntry[4]?String(openEntry[4]).trim():'';
-
-  document.getElementById('mainBody').innerHTML=
-    '<div class="mbody">'+
-    '<div class="ci-card">'+
-    '<div class="ci-lbl"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>'+
-    '<div class="ci-time">'+startTime+'</div>'+
-    '<div class="ci-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> '+locName+(locNote?' — '+locNote:'')+'</div>'+
-    '</div>'+
-    '<div class="slbl">Finish time</div>'+
-    '<div class="clk-card">'+
-    '<div class="clk-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish time</div>'+
-    '<div class="clk-disp" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
-    '<div class="clk-ctrl">'+
-    '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
-    '<div class="col">:</div>'+
-    '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
-    '</div></div>'+
-    '<div class="dur" id="durRow"></div>'+
-    '<button class="btn btn-orange" id="subBtn" onclick="submitFinish()"><i class="ti ti-player-stop"></i> Clock out</button>'+
-    '<p class="msg" id="subMsg"></p>'+
-    '</div>';
-  updDur();
+function clockHTML(){
+  return '<div class="clkcard">'+
+    '<div class="clklbl">'+(openEntry?'<i class="ti ti-player-stop" style="font-size:12px"></i> Finish time':'<i class="ti ti-player-play" style="font-size:12px"></i> Start time')+'</div>'+
+    '<div class="clkd" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
+    '<div class="clkctrl">'+
+      '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
+      '<div class="col">:</div>'+
+      '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
+    '</div></div>';
 }
 
-// ── RENDER: DONE ─────────────────────────────────────────────────────────────
-function renderDone(row){
-  var dur=parseFloat(row[8]||0).toFixed(2);
-  var note=row[4]?String(row[4]).trim():'';
-  document.getElementById('mainBody').innerHTML=
-    '<div class="mbody"><div class="done-wrap">'+
-    '<div class="done-icon"><i class="ti ti-circle-check"></i></div>'+
-    '<h3 style="font-size:19px;font-weight:600;margin-bottom:8px">Shift complete</h3>'+
-    '<p style="font-size:14px;color:var(--text2)">Today\'s hours have been recorded.</p>'+
-    '<div class="done-card">'+
-    '<div class="done-loc"><i class="ti ti-map-pin" style="font-size:13px"></i> '+String(row[3])+(note?' — '+note:'')+'</div>'+
-    '<div class="done-time">'+String(row[6])+' → '+String(row[7])+'</div>'+
-    '<div class="done-hrs">'+dur+' hrs</div>'+
-    '</div></div></div>';
-}
-
-// ── CLOCK ─────────────────────────────────────────────────────────────────────
 function ac(part,delta){
   if(part==='h') cH=(cH+delta+24)%24;
   else           cM=(cM+delta+60)%60;
@@ -335,42 +313,34 @@ function ac(part,delta){
   if(el) el.textContent=pad(cH)+':'+pad(cM);
   updDur();
 }
+
 function updDur(){
-  var el=document.getElementById('durRow');
-  if(!el||!openEntry) return;
-  var sm=s2m(String(openEntry[6])), fm=toMins(cH,cM);
-  if(fm>sm){
-    var t=fm-sm;
-    el.style.color='var(--text2)';
-    el.textContent='Duration: '+Math.floor(t/60)+'h '+(t%60?t%60+'m ':'')+' = '+(t/60).toFixed(2)+' hrs';
-  } else {
-    el.style.color='var(--red)';
-    el.textContent='Finish must be after start ('+openEntry[6]+')';
-  }
+  // no duration display shown — removed per spec
 }
 
-// ── POST TO SHEET — sends as URL-encoded form, no CORS preflight ──────────────
-function postToSheet(payload, onSuccess, onError){
-  // Encode payload as a form field — Google Apps Script reads e.parameter.payload
-  var body='payload='+encodeURIComponent(JSON.stringify(payload));
-  fetch(SCRIPT_URL, {
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:body
-  })
-  .then(function(r){ return r.text(); })
-  .then(function(txt){
-    var j={};
-    try{ j=JSON.parse(txt); }catch(e){ j={ok:true}; } // treat any response as ok
-    if(j.ok!==false) onSuccess();
-    else onError(j.error||'Script error');
-  })
-  .catch(function(err){
-    // If fetch itself fails, try no-cors as last resort (fire-and-forget)
-    fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
-    // Wait a moment then assume it worked (no-cors can't confirm)
-    setTimeout(onSuccess, 2000);
-  });
+// ── OVERLAP CHECK ─────────────────────────────────────────────────────────────
+function hasOverlap(newStart, newFinish){
+  // newFinish = -1 means we're just checking start time doesn't land inside existing slot
+  var ns=s2m(newStart);
+  for(var i=0;i<todayRows.length;i++){
+    var r=todayRows[i];
+    var rs=s2m(String(r[6]));
+    var hasF=r[7]&&String(r[7]).trim();
+    if(hasF){
+      var rf=s2m(String(r[7]));
+      if(newFinish===-1){
+        // just check start doesn't fall inside an existing complete block
+        if(ns>=rs&&ns<rf) return true;
+      } else {
+        // new block [ns,newFinish] overlaps existing [rs,rf]
+        if(ns<rf&&newFinish>rs) return true;
+      }
+    } else {
+      // open entry (no finish) — can't start a new one while one is open
+      if(newFinish===-1) return true;
+    }
+  }
+  return false;
 }
 
 // ── SUBMIT START ──────────────────────────────────────────────────────────────
@@ -379,72 +349,88 @@ function submitStart(){
   var noteEl=document.getElementById('otherNote');
   var note=noteEl?noteEl.value.trim():'';
   var loc=detLoc||'Others';
-  if(loc==='Others'&&!note){ showMsg('err','Please enter the location details.'); return; }
-
-  busy=true;
-  setBtn('subBtn',true);
+  if(loc==='Others'&&!note){showMsg('err','Please enter the location details.');return;}
 
   var timeStr=pad(cH)+':'+pad(cM);
-  var entryId=String(Date.now());
-  var row=[
-    entryId,          // A ID
-    user.id,          // B User ID
-    user.name,        // C Name
-    loc,              // D Location
-    loc==='Others'?note:'', // E Note
-    todayISO(),       // F Date
-    timeStr,          // G Start
-    '',               // H Finish
-    '',               // I Duration
-    'In Progress',    // J Status
-    new Date().toISOString() // K Submitted At
-  ];
+  if(hasOverlap(timeStr,-1)){showMsg('err','You already have an active or overlapping shift at this time.');return;}
 
-  postToSheet(
-    {action:'append', row:row},
-    function(){
-      busy=false;
-      openEntry=row;
-      renderFinish();
-    },
-    function(err){
-      busy=false;
-      setBtn('subBtn',false);
-      showMsg('err','Save failed — check internet and try again. ('+err+')');
-    }
-  );
+  busy=true;setBtn(true,'Clock in');
+
+  var entryId=String(Date.now());
+  var row=[entryId,user.id,user.name,loc,loc==='Others'?note:'',todayISO(),timeStr,'','','In Progress',new Date().toISOString()];
+
+  postSheet({action:'append',row:row},function(){
+    busy=false;
+    openEntry=row;
+    todayRows.push(row);
+    render();
+  },function(e){
+    busy=false;setBtn(false,'Clock in');
+    showMsg('err','Save failed — try again. ('+e+')');
+  });
 }
 
 // ── SUBMIT FINISH ─────────────────────────────────────────────────────────────
 function submitFinish(){
   if(busy||!openEntry) return;
-  var sm=s2m(String(openEntry[6])), fm=toMins(cH,cM);
-  if(fm<=sm){ showMsg('err','Finish time must be after start ('+openEntry[6]+').'); return; }
+  var st=s2m(String(openEntry[6]));
+  var ft=toM(cH,cM);
+  if(ft<=st){showMsg('err','Finish time must be after start ('+openEntry[6]+').');return;}
 
-  busy=true;
-  setBtn('subBtn',true);
-
+  // check new finish doesn't overlap other complete entries
   var timeStr=pad(cH)+':'+pad(cM);
-  var dur=((fm-sm)/60).toFixed(2);
-
-  postToSheet(
-    {action:'update', id:openEntry[0], finishTime:timeStr, duration:dur, status:'Pending'},
-    function(){
-      busy=false;
-      var done=openEntry.slice();
-      done[7]=timeStr; done[8]=dur; done[9]='Pending';
-      renderDone(done);
-    },
-    function(err){
-      busy=false;
-      setBtn('subBtn',false);
-      showMsg('err','Save failed — check internet and try again. ('+err+')');
+  var startStr=String(openEntry[6]).trim();
+  // Check if [start, finish] overlaps any OTHER completed entry
+  var overlap=false;
+  for(var i=0;i<todayRows.length;i++){
+    var r=todayRows[i];
+    if(String(r[0])===String(openEntry[0])) continue; // skip self
+    if(r[7]&&String(r[7]).trim()){
+      var rs=s2m(String(r[6])),rf=s2m(String(r[7]));
+      if(st<rf&&ft>rs){overlap=true;break;}
     }
-  );
+  }
+  if(overlap){showMsg('err','Finish time overlaps an existing shift.');return;}
+
+  busy=true;setBtn(true,'Clock out');
+  var dur=((ft-st)/60).toFixed(2);
+
+  postSheet({action:'update',id:openEntry[0],finishTime:timeStr,duration:dur,status:'Complete'},function(){
+    busy=false;
+    // Update local row
+    openEntry[7]=timeStr;openEntry[8]=dur;openEntry[9]='Complete';
+    openEntry=null;
+    render();
+  },function(e){
+    busy=false;setBtn(false,'Clock out');
+    showMsg('err','Save failed — try again. ('+e+')');
+  });
 }
 
-function setBtn(id,loading){
-  var b=document.getElementById(id);
+// ── POST ──────────────────────────────────────────────────────────────────────
+function postSheet(payload,onOk,onErr){
+  var body='payload='+encodeURIComponent(JSON.stringify(payload));
+  fetch(SCRIPT,{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:body
+  })
+  .then(function(r){return r.text();})
+  .then(function(txt){
+    var j={ok:true};
+    try{j=JSON.parse(txt);}catch(e){}
+    if(j.ok!==false) onOk();
+    else onErr(j.error||'error');
+  })
+  .catch(function(err){
+    // Fallback: no-cors fire-and-forget then assume ok after delay
+    fetch(SCRIPT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
+    setTimeout(onOk,2500);
+  });
+}
+
+function setBtn(loading,label){
+  var b=document.getElementById('subBtn');
   if(!b) return;
   b.disabled=loading;
   if(loading) b.innerHTML='<span class="spinner"></span> Saving…';
