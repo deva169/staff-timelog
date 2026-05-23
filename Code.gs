@@ -90,7 +90,7 @@ function updateRow(p) {
   sh.getRange(row, 8, 1, 3).setValues([[
     p.finish || '',
     p.dur || '',
-    'Complete'
+    'Pending'
   ]]);
   return { ok: true, id: id };
 }

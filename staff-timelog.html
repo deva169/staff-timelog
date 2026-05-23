@@ -474,7 +474,7 @@ function submitFinish(){
     busy=false;setBtn(false);
     console.log('Clock-out response:',JSON.stringify(data));
     if(data.ok){
-      openEntry[7]=timeStr;openEntry[8]=dur;openEntry[9]='Complete';
+      openEntry[7]=timeStr;openEntry[8]=dur;openEntry[9]='Pending';
       openEntry=null;
       loadSheet();
     } else {
