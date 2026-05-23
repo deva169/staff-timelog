@@ -20,6 +20,7 @@ var STAFF_HEADERS = [
   'First name',
   'Last name',
   'DOB',
+  'Mobile',
   'Email',
   'Full name',
   'Initials',
@@ -71,7 +72,7 @@ function ensureHeaders(sh) {
 
 function ensureStaffHeaders(sh) {
   var current = sh.getRange(1, 1, 1, STAFF_HEADERS.length).getValues()[0];
-  var needsHeaders = current.join('') === '';
+  var needsHeaders = current.join('') === '' || String(current[5]).trim() !== 'Mobile';
   if (!needsHeaders) return;
   sh.getRange(1, 1, 1, STAFF_HEADERS.length).setValues([STAFF_HEADERS]);
   sh.setFrozenRows(1);
@@ -79,7 +80,7 @@ function ensureStaffHeaders(sh) {
 
 function ensureDefaultStaff(sh) {
   if (findStaffRow(sh, 'deva') > 0) return;
-  sh.appendRow(['deva', '1234', 'Deva', '', '', '', 'Deva', 'DV', 'Active', new Date().toISOString()]);
+  sh.appendRow(['deva', '1234', 'Deva', '', '', '', '', 'Deva', 'DV', 'Active', new Date().toISOString()]);
 }
 
 function getRows(userId) {
@@ -143,14 +144,14 @@ function loginStaff(p) {
 
   var data = sh.getRange(row, 1, 1, STAFF_HEADERS.length).getDisplayValues()[0];
   if (String(data[1]) !== pin) return { ok: false, error: 'Invalid username or PIN.' };
-  if (String(data[8]).toLowerCase() !== 'active') return { ok: false, error: 'Staff login is not active.' };
+  if (String(data[9]).toLowerCase() !== 'active') return { ok: false, error: 'Staff login is not active.' };
 
   return {
     ok: true,
     user: {
       id: data[0],
-      name: data[6] || data[2],
-      initials: data[7] || initialsFor(data[2], data[3])
+      name: data[7] || data[2],
+      initials: data[8] || initialsFor(data[2], data[3])
     }
   };
 }
@@ -159,11 +160,13 @@ function registerStaff(p) {
   var first = cleanName(p.first || '');
   var last = cleanName(p.last || '');
   var dob = String(p.dob || '').trim();
+  var mobile = String(p.mobile || '').trim();
   var email = String(p.email || '').trim().toLowerCase();
   var pin = String(p.pin || '').trim();
 
-  if (!first || !last || !dob || !email || !pin) return { ok: false, error: 'All registration fields are required.' };
+  if (!first || !last || !dob || !mobile || !email || !pin) return { ok: false, error: 'All registration fields are required.' };
   if (!/^\d{4}$/.test(pin)) return { ok: false, error: 'PIN must be exactly 4 digits.' };
+  if (!/^[0-9 +()-]{8,20}$/.test(mobile)) return { ok: false, error: 'Enter a valid mobile number.' };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, error: 'Enter a valid email address.' };
 
   var sh = getStaffSheet();
@@ -177,6 +180,7 @@ function registerStaff(p) {
     first,
     last,
     dob,
+    mobile,
     email,
     fullName,
     initials,

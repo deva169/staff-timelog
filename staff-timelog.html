@@ -127,6 +127,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
         <div class="field"><label>First name</label><input id="rfname" type="text" autocomplete="given-name"/></div>
         <div class="field"><label>Last name</label><input id="rlname" type="text" autocomplete="family-name"/></div>
         <div class="field fullfield"><label>DOB</label><input id="rdob" type="date" autocomplete="bday"/></div>
+        <div class="field fullfield"><label>Mobile number</label><input id="rmobile" type="tel" inputmode="tel" autocomplete="tel"/></div>
         <div class="field fullfield"><label>Email ID</label><input id="remail" type="email" autocomplete="email"/></div>
         <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/></div>
       </div>
@@ -253,15 +254,17 @@ function doRegister(){
   var first=document.getElementById('rfname').value.trim();
   var last=document.getElementById('rlname').value.trim();
   var dob=document.getElementById('rdob').value.trim();
+  var mobile=document.getElementById('rmobile').value.trim();
   var email=document.getElementById('remail').value.trim();
   var pin=document.getElementById('rpin').value.trim();
   document.getElementById('rerr').textContent='';
   document.getElementById('rok').textContent='';
-  if(!first||!last||!dob||!email||!pin){document.getElementById('rerr').textContent='Please complete all fields.';return;}
+  if(!first||!last||!dob||!mobile||!email||!pin){document.getElementById('rerr').textContent='Please complete all fields.';return;}
   if(!/^\d{4}$/.test(pin)){document.getElementById('rerr').textContent='PIN must be exactly 4 digits.';return;}
+  if(!/^[0-9 +()-]{8,20}$/.test(mobile)){document.getElementById('rerr').textContent='Enter a valid mobile number.';return;}
 
   busy=true;setRegisterBtn(true);
-  apiFetch({action:'register',first:first,last:last,dob:dob,email:email,pin:pin})
+  apiFetch({action:'register',first:first,last:last,dob:dob,mobile:mobile,email:email,pin:pin})
   .then(function(data){
     busy=false;setRegisterBtn(false);
     if(data.ok&&data.user){
