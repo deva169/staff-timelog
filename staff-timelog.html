@@ -47,6 +47,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .btn-sm:hover{background:var(--bg)}
 .errmsg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
 .okmsg{font-size:13px;color:var(--green);margin-top:10px;text-align:center;line-height:1.45;min-height:18px}
+.userconfirm{display:none;margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;text-align:center}
+.userconfirm .ulabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--text3);margin-bottom:5px}
+.userconfirm .uname{font-size:24px;font-family:var(--mono);font-weight:500;color:var(--accent);margin-bottom:12px;word-break:break-word}
 .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .fullfield{grid-column:1/-1}
 .mwrap{display:none}
@@ -135,6 +138,11 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
       <div class="login-actions"><button class="linkbtn" onclick="showLogin()">Back to sign in</button></div>
       <p class="errmsg" id="rerr"></p>
       <p class="okmsg" id="rok"></p>
+      <div class="userconfirm" id="regConfirm">
+        <div class="ulabel">Your username</div>
+        <div class="uname" id="regUserName"></div>
+        <button class="btn btn-gr" onclick="continueAfterRegister()"><i class="ti ti-arrow-right"></i> Continue to time log</button>
+      </div>
     </div>
   </div>
 
@@ -142,7 +150,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
     <div class="tbar">
       <div class="tbar-l">
         <div class="av" id="avEl">DV</div>
-        <div><div class="tname" id="gname"></div><div class="tsub" id="tday"></div></div>
+        <div><div class="tname" id="gname"></div><div class="tsub" id="tday"></div><div class="tsub" id="uidEl"></div></div>
       </div>
       <button class="btn-sm" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
@@ -162,6 +170,7 @@ var LOCS = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 var SESSION_KEY='staffTimelogUserId';
+var pendingRegisteredUser=null;
 var user=null, detLoc=null, todayRows=[], openEntry=null;
 var cH=8, cM=0, busy=false, geoBusy=false, geoMsg='';
 
@@ -211,6 +220,7 @@ function startSession(profile){
   document.getElementById('avEl').textContent=user.initials;
   document.getElementById('gname').textContent='Hello, '+user.name;
   document.getElementById('tday').textContent=todayNice();
+  document.getElementById('uidEl').textContent='Username: '+user.id;
   detectGeoThenLoad();
 }
 document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document.getElementById('lpin').focus();};
@@ -247,6 +257,8 @@ function showLogin(){
   document.getElementById('loginSec').style.display='block';
   document.getElementById('rerr').textContent='';
   document.getElementById('rok').textContent='';
+  document.getElementById('regConfirm').style.display='none';
+  pendingRegisteredUser=null;
 }
 
 function doRegister(){
@@ -259,6 +271,7 @@ function doRegister(){
   var pin=document.getElementById('rpin').value.trim();
   document.getElementById('rerr').textContent='';
   document.getElementById('rok').textContent='';
+  document.getElementById('regConfirm').style.display='none';
   if(!first||!last||!dob||!mobile||!email||!pin){document.getElementById('rerr').textContent='Please complete all fields.';return;}
   if(!/^\d{4}$/.test(pin)){document.getElementById('rerr').textContent='PIN must be exactly 4 digits.';return;}
   if(!/^[0-9 +()-]{8,20}$/.test(mobile)){document.getElementById('rerr').textContent='Enter a valid mobile number.';return;}
@@ -268,10 +281,11 @@ function doRegister(){
   .then(function(data){
     busy=false;setRegisterBtn(false);
     if(data.ok&&data.user){
-      document.getElementById('rok').textContent='Registered. Username: '+data.username;
+      pendingRegisteredUser=data.user;
+      document.getElementById('rok').textContent='Registration complete. Keep this username for future sign in.';
+      document.getElementById('regUserName').textContent=data.username||data.user.id;
+      document.getElementById('regConfirm').style.display='block';
       document.getElementById('rpin').value='';
-      saveSession(data.user);
-      setTimeout(function(){startSession(data.user);},600);
     } else {
       document.getElementById('rerr').textContent=data.error||'Could not register staff.';
     }
@@ -280,6 +294,13 @@ function doRegister(){
     busy=false;setRegisterBtn(false);
     document.getElementById('rerr').textContent='Network error: '+e.message;
   });
+}
+
+function continueAfterRegister(){
+  if(!pendingRegisteredUser) return;
+  saveSession(pendingRegisteredUser);
+  startSession(pendingRegisteredUser);
+  pendingRegisteredUser=null;
 }
 
 function apiFetch(params){
