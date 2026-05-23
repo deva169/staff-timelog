@@ -129,19 +129,21 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 
   <div id="regSec" style="display:none">
     <div class="lbody">
-      <div class="lintro"><h2>Register new staff</h2><p>Create your staff login</p></div>
-      <div class="formgrid">
-        <div class="field"><label>First name</label><input id="rfname" type="text" autocomplete="given-name"/></div>
-        <div class="field"><label>Last name</label><input id="rlname" type="text" autocomplete="family-name"/></div>
-        <div class="field fullfield"><label>DOB</label><input id="rdob" type="date" autocomplete="bday"/></div>
-        <div class="field fullfield"><label>Mobile number</label><input id="rmobile" type="tel" inputmode="tel" autocomplete="tel"/></div>
-        <div class="field fullfield"><label>Email ID</label><input id="remail" type="email" autocomplete="email"/></div>
-        <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/></div>
+      <div id="regForm">
+        <div class="lintro"><h2>Register new staff</h2><p>Create your staff login</p></div>
+        <div class="formgrid">
+          <div class="field"><label>First name</label><input id="rfname" type="text" autocomplete="given-name"/></div>
+          <div class="field"><label>Last name</label><input id="rlname" type="text" autocomplete="family-name"/></div>
+          <div class="field fullfield"><label>DOB</label><input id="rdob" type="date" autocomplete="bday"/></div>
+          <div class="field fullfield"><label>Mobile number</label><input id="rmobile" type="tel" inputmode="tel" autocomplete="tel"/></div>
+          <div class="field fullfield"><label>Email ID</label><input id="remail" type="email" autocomplete="email"/></div>
+          <div class="field fullfield"><label>Create 4 digit PIN</label><input id="rpin" type="password" maxlength="4" inputmode="numeric" autocomplete="new-password"/></div>
+        </div>
+        <button class="btn btn-ac" onclick="doRegister()"><i class="ti ti-user-plus"></i> Register</button>
+        <div class="login-actions"><button class="linkbtn" onclick="showLogin()">Back to sign in</button></div>
+        <p class="errmsg" id="rerr"></p>
+        <p class="okmsg" id="rok"></p>
       </div>
-      <button class="btn btn-ac" onclick="doRegister()"><i class="ti ti-user-plus"></i> Register</button>
-      <div class="login-actions"><button class="linkbtn" onclick="showLogin()">Back to sign in</button></div>
-      <p class="errmsg" id="rerr"></p>
-      <p class="okmsg" id="rok"></p>
       <div class="userconfirm" id="regConfirm">
         <div class="ulabel">Your username</div>
         <div class="uname" id="regUserName"></div>
@@ -257,12 +259,15 @@ function saveSession(profile){
 function showRegister(){
   document.getElementById('loginSec').style.display='none';
   document.getElementById('regSec').style.display='block';
+  document.getElementById('regForm').style.display='block';
+  document.getElementById('regConfirm').style.display='none';
   document.getElementById('lerr').textContent='';
 }
 
 function showLogin(){
   document.getElementById('regSec').style.display='none';
   document.getElementById('loginSec').style.display='block';
+  document.getElementById('regForm').style.display='block';
   document.getElementById('rerr').textContent='';
   document.getElementById('rok').textContent='';
   document.getElementById('regConfirm').style.display='none';
@@ -291,8 +296,8 @@ function doRegister(){
     if(data.ok&&data.user){
       pendingRegisteredUser=data.user;
       try{sessionStorage.setItem(NEW_USER_KEY,data.username||data.user.id);}catch(e){}
-      document.getElementById('rok').textContent='Registration complete. Keep this username for future sign in.';
       document.getElementById('regUserName').textContent=data.username||data.user.id;
+      document.getElementById('regForm').style.display='none';
       document.getElementById('regConfirm').style.display='block';
       document.getElementById('rpin').value='';
     } else {
