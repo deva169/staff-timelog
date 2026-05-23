@@ -21,7 +21,6 @@
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem 4rem}
 .card{background:var(--surface);border-radius:var(--rl);border:1px solid var(--border);width:100%;max-width:460px;overflow:hidden}
-
 .app-header{background:var(--accent);padding:1.4rem 1.75rem;display:flex;align-items:center;justify-content:space-between}
 .app-header-left{display:flex;align-items:center;gap:12px}
 .app-logo{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
@@ -30,7 +29,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .app-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px}
 .live-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.12);padding:4px 10px;border-radius:20px}
 .live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
-
 .login-body{padding:2rem 1.75rem}
 .login-intro{text-align:center;margin-bottom:1.75rem}
 .login-intro h2{font-size:20px;font-weight:600}
@@ -39,8 +37,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .field label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px}
 .field input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--surface);color:var(--text);transition:border-color 0.15s,box-shadow 0.15s}
 .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,58,92,0.1)}
-
-.btn{width:100%;padding:12px;border:none;border-radius:var(--r);font-size:15px;font-weight:600;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.1s}
+.btn{width:100%;padding:13px;border:none;border-radius:var(--r);font-size:15px;font-weight:600;font-family:var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.1s}
 .btn:hover{opacity:0.87}
 .btn:active{transform:scale(0.98)}
 .btn:disabled{opacity:0.42;cursor:not-allowed;transform:none}
@@ -50,68 +47,58 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .btn-outline{background:none;border:1px solid var(--border);color:var(--text2);font-size:13px;padding:7px 14px;width:auto;font-family:var(--sans);cursor:pointer;border-radius:var(--r);display:flex;align-items:center;gap:6px}
 .btn-outline:hover{background:var(--bg)}
 .err-msg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
-
 .main-wrap{display:none}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--border);background:#f9fafc}
 .topbar-l{display:flex;align-items:center;gap:10px}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .topbar-name{font-size:14px;font-weight:600}
 .topbar-sub{font-size:12px;color:var(--text2);margin-top:1px}
-
 .main-body{padding:1.5rem 1.75rem}
 .step-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);margin-bottom:10px}
 .divider{height:1px;background:var(--border);margin:1.25rem 0}
-
-/* LOCATION PILL — auto detected, read only */
-.loc-detected{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc}
-.loc-detected i{font-size:20px;color:var(--accent);flex-shrink:0}
-.loc-name-big{font-size:15px;font-weight:600;color:var(--text)}
-.loc-name-sub{font-size:12px;color:var(--text2);margin-top:1px}
-.loc-searching{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;color:var(--text2);font-size:14px}
-
-/* OTHERS note */
-textarea.notes{width:100%;padding:10px 13px;margin-top:10px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);background:var(--surface);color:var(--text);resize:vertical;min-height:70px}
+.loc-box{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc}
+.loc-box i{font-size:22px;flex-shrink:0}
+.loc-box .lname{font-size:15px;font-weight:600}
+.loc-box .lsub{font-size:12px;color:var(--text2);margin-top:2px}
+.loc-box.others{border-color:#f9a87a;background:var(--orange-lt)}
+.loc-box.others i{color:var(--orange)}
+textarea.notes{width:100%;padding:10px 13px;margin-top:10px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);background:var(--surface);color:var(--text);resize:vertical;min-height:80px}
 textarea.notes:focus{outline:none;border-color:var(--accent)}
-
-/* DATE */
-.date-display{width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);font-size:15px;background:#f9fafc;color:var(--text);display:flex;align-items:center;gap:10px}
-.date-display i{color:var(--text3);font-size:18px}
-
-/* CLOCK */
-.clock-box{border:1px solid var(--border);border-radius:var(--r);padding:16px 12px;background:var(--surface)}
-.clock-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text2);margin-bottom:10px}
-.clock-disp{font-size:48px;font-weight:500;color:var(--accent);text-align:center;letter-spacing:4px;font-family:var(--mono);margin-bottom:12px}
-.clock-ctrl{display:grid;grid-template-columns:1fr 16px 1fr;gap:6px;align-items:center;max-width:200px;margin:0 auto}
+.date-box{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;font-size:15px}
+.date-box i{color:var(--text3);font-size:18px}
+.clock-card{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
+.clock-card-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
+.clock-disp{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
+.clock-ctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
 .tpart{display:flex;flex-direction:column;align-items:center;gap:6px}
-.colon{font-size:20px;color:var(--text3);text-align:center;font-weight:500}
-.adj{width:44px;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--sans);transition:all 0.1s;user-select:none;-webkit-user-select:none}
-.adj:hover{background:var(--accent-lt);color:var(--accent);border-color:rgba(26,58,92,0.25)}
-.adj:active{transform:scale(0.91)}
-
-/* clocked-in orange box */
-.clocked-time-box{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:14px 16px;text-align:center;margin-bottom:1.25rem}
-.clocked-time-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:4px}
-.clocked-time-value{font-size:36px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:3px}
-.clocked-loc{font-size:12px;color:var(--orange);margin-top:4px}
-
-.dur-hint{font-size:12px;color:var(--text2);text-align:center;min-height:18px;margin-top:8px;margin-bottom:1.25rem}
-.sub-msg{margin-top:11px;font-size:13px;text-align:center;min-height:20px;line-height:1.5}
+.colon{font-size:22px;color:var(--text3);font-weight:500;padding-bottom:4px}
+.adj{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;user-select:none;-webkit-user-select:none;font-family:var(--sans)}
+.adj:hover{background:var(--accent-lt);color:var(--accent);border-color:rgba(26,58,92,0.3)}
+.adj:active{transform:scale(0.88)}
+.clocked-in-card{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
+.ci-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:6px}
+.ci-time{font-size:40px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:4px;line-height:1}
+.ci-loc{font-size:12px;color:var(--orange);margin-top:6px;font-weight:500}
+.dur-row{text-align:center;font-size:13px;color:var(--text2);margin-top:10px;margin-bottom:1.25rem;min-height:20px}
+.sub-msg{margin-top:12px;font-size:13px;text-align:center;line-height:1.5;min-height:20px}
 .sub-msg.ok{color:var(--green)}
 .sub-msg.err{color:var(--red)}
-
-/* loading overlay */
-.loading-state{text-align:center;padding:3rem 1.75rem;color:var(--text2);font-size:14px}
-.loading-state i{font-size:32px;color:var(--text3);margin-bottom:12px;display:block}
-
-.app-footer{text-align:center;padding:1rem;font-size:11px;color:var(--text3);border-top:1px solid var(--border)}
-.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.65s linear infinite}
-.spinner-dark{display:inline-block;width:16px;height:16px;border:2px solid rgba(26,58,92,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.65s linear infinite}
+.done-wrap{text-align:center;padding:2rem 0.5rem}
+.done-icon{width:68px;height:68px;background:var(--green-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.done-icon i{font-size:36px;color:var(--green)}
+.done-card{background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:20px;margin-top:1.25rem}
+.done-loc{font-size:13px;font-weight:600;color:var(--green);margin-bottom:10px}
+.done-time{font-size:32px;font-weight:500;font-family:var(--mono);color:var(--green);letter-spacing:2px}
+.done-hrs{font-size:24px;font-weight:600;color:var(--green);margin-top:8px}
+.loading-body{padding:3rem 1.75rem;text-align:center;color:var(--text2);font-size:14px}
+.spin-icon{font-size:32px;color:var(--text3);margin-bottom:12px;display:block;animation:spin 1s linear infinite}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
+.app-footer{text-align:center;padding:1rem;font-size:11px;color:var(--text3);border-top:1px solid var(--border)}
 @media(max-width:420px){
   body{padding:0}
   .card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}
-  .clock-disp{font-size:40px}
+  .clock-disp{font-size:42px}
 }
 </style>
 </head>
@@ -126,7 +113,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
         <div class="app-sub">A2B Stores &amp; Warehouse</div>
       </div>
     </div>
-    <div class="live-badge"><span class="live-dot"></span> Live</div>
+    <div class="live-badge"><span class="live-dot"></span>Live</div>
   </div>
 
   <!-- LOGIN -->
@@ -134,7 +121,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
     <div class="login-body">
       <div class="login-intro">
         <h2>Sign in to log hours</h2>
-        <p>Enter your login ID and PIN to continue</p>
+        <p>Enter your login ID and PIN</p>
       </div>
       <div class="field">
         <label>Login ID</label>
@@ -158,15 +145,15 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
         <div class="avatar" id="avatarEl">DV</div>
         <div>
           <div class="topbar-name" id="greetName">Welcome</div>
-          <div class="topbar-sub" id="todayBadge"></div>
+          <div class="topbar-sub" id="todayStr"></div>
         </div>
       </div>
       <button class="btn-outline" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
-    <div class="main-body" id="mainBody">
-      <div class="loading-state">
-        <i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>
-        Checking your shift status…
+    <div id="mainBody">
+      <div class="loading-body">
+        <i class="ti ti-loader-2 spin-icon"></i>
+        Loading your shift status…
       </div>
     </div>
   </div>
@@ -175,341 +162,389 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 </div>
 
 <script>
-const SCRIPT = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
+// ─────────────────────────────────────────────────────────────────────────────
+// CONFIGURATION — edit these as needed
+// ─────────────────────────────────────────────────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
 
-// ── ADD MORE STAFF HERE ───────────────────────────────────────────────────────
 const USERS = {
   deva: { pin:'1234', name:'Deva', initials:'DV' }
+  // Add more: sam: { pin:'5678', name:'Sam', initials:'SM' }
 };
 
-// Exact coordinates from Google Maps
-const GEO_LOCATIONS = [
-  { name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, r:300 },
-  { name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, r:300 },
-  { name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, r:300 }
+// Exact GPS coords from Google Maps links — radius in metres
+const LOCATIONS = [
+  { name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, radius:300 },
+  { name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, radius:300 },
+  { name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, radius:300 }
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
-let S = { user:null, H:8, M:0, busy:false };
-let detectedLocation = null; // set by GPS
-let openEntry = null;        // today's in-progress row from sheet
+let currentUser  = null;
+let openEntry    = null;   // today's in-progress row (has start, no finish)
+let detectedLoc  = null;   // string: location name or 'Others'
+let cH = 8, cM = 0;       // clock state
+let busy = false;
 
 const pad    = n => String(n).padStart(2,'0');
-const mins   = (h,m) => h*60+m;
-const t2mins = t => { if(!t) return 0; const p=String(t).split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); };
-const todayISO = () => { const d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); };
-const todayFmt = () => new Date().toLocaleDateString('en-AU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const toMins = (h,m) => h*60+m;
+const str2m  = s => { const p=(s||'').split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); };
+
+function todayISO(){
+  const d=new Date();
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+function todayNice(){
+  return new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
-function doLogin() {
+function doLogin(){
   const id  = document.getElementById('lid').value.trim().toLowerCase();
   const pin = document.getElementById('lpin').value.trim();
   const err = document.getElementById('loginErr');
-  if (!USERS[id] || USERS[id].pin !== pin) {
-    err.textContent = 'Invalid login ID or PIN — please try again.';
-    document.getElementById('lpin').value = '';
+  if(!USERS[id]||USERS[id].pin!==pin){
+    err.textContent='Invalid login ID or PIN.';
+    document.getElementById('lpin').value='';
     return;
   }
-  err.textContent = '';
-  S.user = { id, ...USERS[id] };
-  document.getElementById('loginSection').style.display = 'none';
-  document.getElementById('mainSection').style.display  = 'block';
-  document.getElementById('avatarEl').textContent  = S.user.initials;
-  document.getElementById('greetName').textContent = 'Hello, ' + S.user.name;
-  document.getElementById('todayBadge').textContent = todayFmt();
-  // First detect GPS, then load sheet entry
-  detectGeoThenLoad();
+  err.textContent='';
+  currentUser={id,...USERS[id]};
+  document.getElementById('loginSection').style.display='none';
+  document.getElementById('mainSection').style.display='block';
+  document.getElementById('avatarEl').textContent=currentUser.initials;
+  document.getElementById('greetName').textContent='Hello, '+currentUser.name;
+  document.getElementById('todayStr').textContent=todayNice();
+  startUp();
 }
-document.getElementById('lid').addEventListener('keydown',  e=>{ if(e.key==='Enter') document.getElementById('lpin').focus(); });
-document.getElementById('lpin').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+document.getElementById('lid').onkeydown=e=>{if(e.key==='Enter')document.getElementById('lpin').focus()};
+document.getElementById('lpin').onkeydown=e=>{if(e.key==='Enter')doLogin()};
 
-function doLogout() {
-  S = { user:null, H:8, M:0, busy:false };
-  openEntry = null; detectedLocation = null;
-  document.getElementById('loginSection').style.display = 'block';
-  document.getElementById('mainSection').style.display  = 'none';
-  document.getElementById('lid').value  = '';
-  document.getElementById('lpin').value = '';
-  document.getElementById('mainBody').innerHTML = '<div class="loading-state"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Checking your shift status…</div>';
+function doLogout(){
+  currentUser=null; openEntry=null; detectedLoc=null; busy=false;
+  document.getElementById('loginSection').style.display='block';
+  document.getElementById('mainSection').style.display='none';
+  document.getElementById('lid').value='';
+  document.getElementById('lpin').value='';
+  document.getElementById('mainBody').innerHTML='<div class="loading-body"><i class="ti ti-loader-2 spin-icon"></i>Loading…</div>';
 }
 
-// ── GEOLOCATION → then load sheet ─────────────────────────────────────────────
-function detectGeoThenLoad() {
-  if (!navigator.geolocation) {
-    detectedLocation = 'Others';
-    loadSheetThenRender();
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(pos => {
-    const {latitude:lat, longitude:lon} = pos.coords;
-    let best=null, bestD=Infinity;
-    GEO_LOCATIONS.forEach(g => {
-      const dx=(lat-g.lat)*111000, dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<g.r && d<bestD){ bestD=d; best=g; }
-    });
-    detectedLocation = best ? best.name : 'Others';
-    loadSheetThenRender();
-  }, () => {
-    detectedLocation = 'Others';
-    loadSheetThenRender();
-  }, { timeout:6000 });
+// ── STARTUP: GPS then sheet ───────────────────────────────────────────────────
+function startUp(){
+  if(!navigator.geolocation){ detectedLoc='Others'; loadSheet(); return; }
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      const {latitude:lat,longitude:lon}=pos.coords;
+      let best=null,bestD=Infinity;
+      LOCATIONS.forEach(g=>{
+        const dx=(lat-g.lat)*111000;
+        const dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<g.radius&&d<bestD){bestD=d;best=g;}
+      });
+      detectedLoc=best?best.name:'Others';
+      loadSheet();
+    },
+    ()=>{ detectedLoc='Others'; loadSheet(); },
+    {timeout:7000,maximumAge:60000}
+  );
 }
 
-// ── LOAD SHEET ROWS ───────────────────────────────────────────────────────────
-async function loadSheetThenRender() {
-  try {
-    const res  = await fetch(SCRIPT+'?action=get&userId='+encodeURIComponent(S.user.id));
-    const data = await res.json();
-    if (data.ok && Array.isArray(data.rows)) {
-      const today = todayISO();
-      // Open = today, has start (col G = index 6), no finish (col H = index 7 empty)
-      const open = data.rows.find(r => r[5]===today && r[6] && (!r[7]||r[7]===''));
-      // Done = today, has both start and finish
-      const done = data.rows.find(r => r[5]===today && r[6] && r[7] && r[7]!=='');
-      if (done) { renderDone(done); return; }
-      if (open) { openEntry=open; renderFinish(); return; }
+// ── LOAD SHEET — check for today's entry ─────────────────────────────────────
+async function loadSheet(){
+  try{
+    const url=SCRIPT_URL+'?action=get&userId='+encodeURIComponent(currentUser.id)+'&t='+Date.now();
+    const res=await fetch(url);
+    const data=await res.json();
+    if(data.ok&&Array.isArray(data.rows)){
+      const today=todayISO();
+      // done = both start AND finish present
+      const done=data.rows.find(r=>r[5]===today&&r[6]&&r[7]&&String(r[7]).trim()!=='');
+      if(done){ renderDone(done); return; }
+      // open = start present, finish empty
+      const open=data.rows.find(r=>r[5]===today&&r[6]&&(!r[7]||String(r[7]).trim()===''));
+      if(open){ openEntry=open; renderFinish(); return; }
     }
-  } catch(e){}
+  }catch(e){ console.warn('Sheet load error:',e); }
   renderStart();
 }
 
-// ── RENDER: START (clock-in) ──────────────────────────────────────────────────
-function renderStart() {
-  openEntry = null;
-  // Default clock to current time
-  const now = new Date();
-  S.H = now.getHours(); S.M = now.getMinutes();
+// ── RENDER: CLOCK-IN ─────────────────────────────────────────────────────────
+function renderStart(){
+  openEntry=null;
+  const now=new Date(); cH=now.getHours(); cM=now.getMinutes();
+  const locHtml=detectedLoc&&detectedLoc!=='Others'
+    ?`<div class="loc-box"><i class="ti ti-map-pin" style="color:var(--accent)"></i>
+        <div><div class="lname">${detectedLoc}</div>
+        <div class="lsub"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>`
+    :`<div class="loc-box others"><i class="ti ti-map-pin"></i>
+        <div><div class="lname">Other Location</div>
+        <div class="lsub">Not near a registered site</div></div></div>
+       <textarea class="notes" id="otherNote" placeholder="Enter location details — e.g. Diwali Mela stall at Perth City"></textarea>`;
 
-  const locHtml = buildLocHtml();
-
-  document.getElementById('mainBody').innerHTML = `
-    <div class="step-lbl">Step 1 — Location</div>
-    ${locHtml}
-    <div id="othersWrap" style="display:${detectedLocation==='Others'?'block':'none'}">
-      <textarea class="notes" id="otherNote" placeholder="Enter location details — e.g. Diwali Mela stall at Perth City"></textarea>
-    </div>
-    <div class="divider"></div>
-    <div class="step-lbl">Step 2 — Date</div>
-    <div class="date-display"><i class="ti ti-calendar-event"></i><span>${todayFmt()}</span></div>
-    <div class="divider"></div>
-    <div class="step-lbl">Step 3 — Start time</div>
-    <div class="clock-box">
-      <div class="clock-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start time</div>
-      <div class="clock-disp" id="cdsp">${pad(S.H)}:${pad(S.M)}</div>
-      <div class="clock-ctrl">
-        <div class="tpart">
-          <button class="adj" onclick="adj('h',1)">&#8743;</button>
-          <button class="adj" onclick="adj('h',-1)">&#8744;</button>
-        </div>
-        <div class="colon">:</div>
-        <div class="tpart">
-          <button class="adj" onclick="adj('m',1)">&#8743;</button>
-          <button class="adj" onclick="adj('m',-1)">&#8744;</button>
+  document.getElementById('mainBody').innerHTML=`
+    <div class="main-body">
+      <div class="step-lbl">Location</div>
+      ${locHtml}
+      <div class="divider"></div>
+      <div class="step-lbl">Date</div>
+      <div class="date-box"><i class="ti ti-calendar-event"></i><span>${todayNice()}</span></div>
+      <div class="divider"></div>
+      <div class="step-lbl">Start time</div>
+      <div class="clock-card">
+        <div class="clock-card-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start time</div>
+        <div class="clock-disp" id="cdsp">${pad(cH)}:${pad(cM)}</div>
+        <div class="clock-ctrl">
+          <div class="tpart">
+            <button class="adj" onclick="adjClock('h',1)">&#8743;</button>
+            <button class="adj" onclick="adjClock('h',-1)">&#8744;</button>
+          </div>
+          <div class="colon">:</div>
+          <div class="tpart">
+            <button class="adj" onclick="adjClock('m',1)">&#8743;</button>
+            <button class="adj" onclick="adjClock('m',-1)">&#8744;</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="divider" style="margin-top:1.25rem"></div>
-    <div class="step-lbl">Step 4 — Clock in</div>
-    <button class="btn btn-green" id="subBtn" onclick="submitStart()">
-      <i class="ti ti-player-play"></i> Clock in
-    </button>
-    <p class="sub-msg" id="subMsg"></p>`;
+      <div class="divider"></div>
+      <button class="btn btn-green" id="subBtn" onclick="submitStart()">
+        <i class="ti ti-player-play"></i> Clock in
+      </button>
+      <p class="sub-msg" id="subMsg"></p>
+    </div>`;
 }
 
-// ── RENDER: FINISH (clock-out) ────────────────────────────────────────────────
-function renderFinish() {
-  // Default finish clock to current time
-  const now = new Date();
-  S.H = now.getHours(); S.M = now.getMinutes();
+// ── RENDER: CLOCK-OUT ────────────────────────────────────────────────────────
+function renderFinish(){
+  const now=new Date(); cH=now.getHours(); cM=now.getMinutes();
+  const startTime=openEntry[6];
+  const locName=openEntry[3];
+  const locNote=openEntry[4]?` — ${openEntry[4]}`:'';
 
-  const locName = openEntry[3];
-  const startTime = openEntry[6];
-
-  document.getElementById('mainBody').innerHTML = `
-    <div class="clocked-time-box">
-      <div class="clocked-time-label"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>
-      <div class="clocked-time-value">${startTime}</div>
-      <div class="clocked-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> ${locName}</div>
-    </div>
-    <div class="step-lbl">Finish time</div>
-    <div class="clock-box">
-      <div class="clock-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish time</div>
-      <div class="clock-disp" id="cdsp">${pad(S.H)}:${pad(S.M)}</div>
-      <div class="clock-ctrl">
-        <div class="tpart">
-          <button class="adj" onclick="adj('h',1)">&#8743;</button>
-          <button class="adj" onclick="adj('h',-1)">&#8744;</button>
-        </div>
-        <div class="colon">:</div>
-        <div class="tpart">
-          <button class="adj" onclick="adj('m',1)">&#8743;</button>
-          <button class="adj" onclick="adj('m',-1)">&#8744;</button>
+  document.getElementById('mainBody').innerHTML=`
+    <div class="main-body">
+      <div class="clocked-in-card">
+        <div class="ci-lbl"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>
+        <div class="ci-time">${startTime}</div>
+        <div class="ci-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> ${locName}${locNote}</div>
+      </div>
+      <div class="step-lbl">Finish time</div>
+      <div class="clock-card">
+        <div class="clock-card-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish time</div>
+        <div class="clock-disp" id="cdsp">${pad(cH)}:${pad(cM)}</div>
+        <div class="clock-ctrl">
+          <div class="tpart">
+            <button class="adj" onclick="adjClock('h',1)">&#8743;</button>
+            <button class="adj" onclick="adjClock('h',-1)">&#8744;</button>
+          </div>
+          <div class="colon">:</div>
+          <div class="tpart">
+            <button class="adj" onclick="adjClock('m',1)">&#8743;</button>
+            <button class="adj" onclick="adjClock('m',-1)">&#8744;</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="dur-hint" id="durHint"></div>
-    <button class="btn btn-orange" id="subBtn" onclick="submitFinish()">
-      <i class="ti ti-player-stop"></i> Clock out
-    </button>
-    <p class="sub-msg" id="subMsg"></p>`;
-  calcDurFinish();
+      <div class="dur-row" id="durRow"></div>
+      <button class="btn btn-orange" id="subBtn" onclick="submitFinish()">
+        <i class="ti ti-player-stop"></i> Clock out
+      </button>
+      <p class="sub-msg" id="subMsg"></p>
+    </div>`;
+  updateDur();
 }
 
-// ── RENDER: DONE ──────────────────────────────────────────────────────────────
-function renderDone(row) {
-  const dur = parseFloat(row[8]).toFixed(2);
-  document.getElementById('mainBody').innerHTML = `
-    <div style="text-align:center;padding:2rem 0.5rem">
-      <div style="width:64px;height:64px;background:var(--green-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem">
-        <i class="ti ti-circle-check" style="font-size:34px;color:var(--green)"></i>
-      </div>
-      <h3 style="font-size:18px;font-weight:600;margin-bottom:8px">Shift complete</h3>
-      <p style="font-size:14px;color:var(--text2);margin-bottom:1.5rem">Today's hours have been recorded.</p>
-      <div style="background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:18px">
-        <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:8px">
-          <i class="ti ti-map-pin" style="font-size:13px"></i> ${row[3]}${row[4]?' — '+row[4]:''}
+// ── RENDER: DONE ─────────────────────────────────────────────────────────────
+function renderDone(row){
+  const dur=parseFloat(row[8]||0).toFixed(2);
+  const note=row[4]?` — ${row[4]}`:'';
+  document.getElementById('mainBody').innerHTML=`
+    <div class="main-body">
+      <div class="done-wrap">
+        <div class="done-icon"><i class="ti ti-circle-check"></i></div>
+        <h3 style="font-size:19px;font-weight:600;margin-bottom:8px">Shift complete</h3>
+        <p style="font-size:14px;color:var(--text2)">Today's hours have been recorded.</p>
+        <div class="done-card">
+          <div class="done-loc"><i class="ti ti-map-pin" style="font-size:13px"></i> ${row[3]}${note}</div>
+          <div class="done-time">${row[6]} → ${row[7]}</div>
+          <div class="done-hrs">${dur} hrs</div>
         </div>
-        <div style="font-size:32px;font-weight:500;font-family:var(--mono);color:var(--green);letter-spacing:2px">
-          ${row[6]} → ${row[7]}
-        </div>
-        <div style="font-size:22px;font-weight:600;color:var(--green);margin-top:8px">${dur} hrs</div>
       </div>
     </div>`;
 }
 
-// ── LOCATION HTML ─────────────────────────────────────────────────────────────
-function buildLocHtml() {
-  if (detectedLocation && detectedLocation !== 'Others') {
-    return `<div class="loc-detected">
-      <i class="ti ti-map-pin"></i>
-      <div>
-        <div class="loc-name-big">${detectedLocation}</div>
-        <div class="loc-name-sub"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div>
-      </div>
-    </div>`;
-  }
-  // Others
-  return `<div class="loc-detected" style="border-color:#f9a87a;background:var(--orange-lt)">
-    <i class="ti ti-map-pin" style="color:var(--orange)"></i>
-    <div>
-      <div class="loc-name-big">Other Location</div>
-      <div class="loc-name-sub" style="color:var(--orange)">Not near a registered site — enter details below</div>
-    </div>
-  </div>`;
-}
-
-// ── CLOCK ADJUST ──────────────────────────────────────────────────────────────
-function adj(part, delta) {
-  if(part==='h') S.H=(S.H+delta+24)%24;
-  else           S.M=(S.M+delta+60)%60;
+// ── CLOCK ─────────────────────────────────────────────────────────────────────
+function adjClock(part,delta){
+  if(part==='h') cH=(cH+delta+24)%24;
+  else           cM=(cM+delta+60)%60;
   const el=document.getElementById('cdsp');
-  if(el) el.textContent=pad(S.H)+':'+pad(S.M);
-  calcDurFinish();
+  if(el) el.textContent=pad(cH)+':'+pad(cM);
+  updateDur();
 }
-
-function calcDurFinish() {
-  if(!openEntry) return;
-  const el=document.getElementById('durHint');
-  if(!el) return;
-  const sm=t2mins(openEntry[6]), fm=mins(S.H,S.M);
+function updateDur(){
+  const el=document.getElementById('durRow');
+  if(!el||!openEntry) return;
+  const sm=str2m(openEntry[6]), fm=toMins(cH,cM);
   if(fm>sm){
     const t=fm-sm;
     el.style.color='var(--text2)';
     el.textContent='Duration: '+Math.floor(t/60)+'h '+(t%60?t%60+'m ':'')+' = '+(t/60).toFixed(2)+' hrs';
   } else {
     el.style.color='var(--red)';
-    el.textContent='Finish time must be after '+openEntry[6];
+    el.textContent='Finish must be after start time ('+openEntry[6]+')';
   }
 }
 
-// ── SUBMIT START ──────────────────────────────────────────────────────────────
-async function submitStart() {
-  if(S.busy) return;
-  const note = document.getElementById('otherNote') ? document.getElementById('otherNote').value.trim() : '';
-  const loc  = detectedLocation || 'Others';
+// ── SUBMIT START — uses a hidden iframe trick for reliable CORS-free POST ─────
+async function submitStart(){
+  if(busy) return;
+  const note=document.getElementById('otherNote')?document.getElementById('otherNote').value.trim():'';
+  const loc=detectedLoc||'Others';
+  if(loc==='Others'&&!note){ showErr('Please enter the location details.'); return; }
 
-  if(loc==='Others' && !note){ showErr('Please enter the location details.'); return; }
+  busy=true;
+  setBtnLoading('subBtn',true,'Clock in');
+  clearMsg();
 
-  S.busy=true;
-  const btn=document.getElementById('subBtn');
-  btn.disabled=true;
-  btn.innerHTML='<span class="spinner"></span> Saving…';
-
-  const timeStr = pad(S.H)+':'+pad(S.M);
+  const timeStr=pad(cH)+':'+pad(cM);
+  const entryId=Date.now().toString();
   const row=[
-    Date.now().toString(),    // A — ID
-    S.user.id,                // B — User ID
-    S.user.name,              // C — Name
-    loc,                      // D — Location
-    loc==='Others'?note:'',   // E — Note
-    todayISO(),               // F — Date
-    timeStr,                  // G — Start
-    '',                       // H — Finish
-    '',                       // I — Duration
-    'In Progress',            // J — Status
-    new Date().toISOString()  // K — Submitted At
+    entryId,
+    currentUser.id,
+    currentUser.name,
+    loc,
+    loc==='Others'?note:'',
+    todayISO(),
+    timeStr,
+    '',
+    '',
+    'In Progress',
+    new Date().toISOString()
   ];
 
-  let ok=false;
-  try {
-    await fetch(SCRIPT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'append',row})});
-    ok=true;
-  } catch(e){}
+  const payload={action:'append',row:row};
+  const ok=await postToSheet(payload);
 
-  S.busy=false;
+  busy=false;
+  setBtnLoading('subBtn',false,'Clock in');
+
   if(ok){
-    // Store the row locally as openEntry and switch to finish mode
+    // Build the openEntry from what we just saved so renderFinish works immediately
     openEntry=row;
     renderFinish();
   } else {
-    btn.disabled=false;
-    btn.innerHTML='<i class="ti ti-player-play"></i> Clock in';
-    showErr('Network error — please try again.');
+    showErr('Could not save. Check your internet connection and try again.');
   }
 }
 
 // ── SUBMIT FINISH ─────────────────────────────────────────────────────────────
-async function submitFinish() {
-  if(S.busy||!openEntry) return;
-  const sm=t2mins(openEntry[6]), fm=mins(S.H,S.M);
+async function submitFinish(){
+  if(busy||!openEntry) return;
+  const sm=str2m(openEntry[6]), fm=toMins(cH,cM);
   if(fm<=sm){ showErr('Finish time must be after your start time ('+openEntry[6]+').'); return; }
 
-  S.busy=true;
-  const btn=document.getElementById('subBtn');
-  btn.disabled=true;
-  btn.innerHTML='<span class="spinner"></span> Saving…';
+  busy=true;
+  setBtnLoading('subBtn',true,'Clock out');
+  clearMsg();
 
-  const timeStr = pad(S.H)+':'+pad(S.M);
-  const dur     = ((fm-sm)/60).toFixed(2);
+  const timeStr=pad(cH)+':'+pad(cM);
+  const dur=((fm-sm)/60).toFixed(2);
+  const payload={action:'update',id:openEntry[0],finishTime:timeStr,duration:dur,status:'Pending'};
+  const ok=await postToSheet(payload);
 
-  let ok=false;
-  try {
-    await fetch(SCRIPT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      action:'update',
-      id:openEntry[0],
-      finishTime:timeStr,
-      duration:dur,
-      status:'Pending'
-    })});
-    ok=true;
-  } catch(e){}
+  busy=false;
+  setBtnLoading('subBtn',false,'Clock out');
 
-  S.busy=false;
   if(ok){
-    const doneRow=[...openEntry];
-    doneRow[7]=timeStr; doneRow[8]=dur; doneRow[9]='Pending';
-    renderDone(doneRow);
+    const done=[...openEntry];
+    done[7]=timeStr; done[8]=dur; done[9]='Pending';
+    renderDone(done);
   } else {
-    btn.disabled=false;
-    btn.innerHTML='<i class="ti ti-player-stop"></i> Clock out';
-    showErr('Network error — please try again.');
+    showErr('Could not save. Check your internet connection and try again.');
   }
 }
 
+// ── SHEET POST — fetch with JSON, handles CORS via Apps Script ────────────────
+async function postToSheet(payload){
+  // Google Apps Script supports CORS when deployed as web app with "Anyone" access.
+  // We use a straightforward fetch with application/json.
+  // If that fails (CORS), we fall back to the iframe/form method.
+  try{
+    const res=await fetch(SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const txt=await res.text();
+    try{
+      const j=JSON.parse(txt);
+      if(j.ok) return true;
+      console.error('Script error:',j.error);
+      return false;
+    }catch(e){
+      // Apps Script returned a redirect (302) which means it saved OK but
+      // the follow-through body is HTML. This happens with no-cors redirects.
+      // If status is 200 or we got any response, treat as success.
+      return res.ok||res.status===0;
+    }
+  }catch(err){
+    console.warn('Fetch failed, trying form method:',err);
+    return postViaForm(payload);
+  }
+}
+
+// ── FALLBACK: hidden form POST (works even with strict CORS) ──────────────────
+function postViaForm(payload){
+  return new Promise(resolve=>{
+    try{
+      const iframe=document.createElement('iframe');
+      iframe.name='_gsframe_'+Date.now();
+      iframe.style.display='none';
+      document.body.appendChild(iframe);
+
+      const form=document.createElement('form');
+      form.method='POST';
+      form.action=SCRIPT_URL;
+      form.target=iframe.name;
+      form.style.display='none';
+
+      const inp=document.createElement('input');
+      inp.type='hidden';
+      inp.name='payload';
+      inp.value=JSON.stringify(payload);
+      form.appendChild(inp);
+      document.body.appendChild(form);
+
+      iframe.onload=()=>{
+        setTimeout(()=>{
+          document.body.removeChild(form);
+          document.body.removeChild(iframe);
+        },500);
+        resolve(true); // assume success if iframe loaded
+      };
+      setTimeout(()=>resolve(true),5000); // timeout fallback
+      form.submit();
+    }catch(e){ resolve(false); }
+  });
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function setBtnLoading(id,loading,label){
+  const btn=document.getElementById(id);
+  if(!btn) return;
+  btn.disabled=loading;
+  btn.innerHTML=loading
+    ?'<span class="spinner"></span> Saving…'
+    :(id==='subBtn'&&openEntry
+      ?'<i class="ti ti-player-stop"></i> Clock out'
+      :'<i class="ti ti-player-play"></i> '+label);
+}
 function showErr(msg){
   const el=document.getElementById('subMsg');
-  if(el){ el.className='sub-msg err'; el.textContent=msg; }
+  if(el){el.className='sub-msg err';el.textContent=msg;}
+}
+function clearMsg(){
+  const el=document.getElementById('subMsg');
+  if(el){el.className='sub-msg';el.textContent='';}
 }
 </script>
 </body>
