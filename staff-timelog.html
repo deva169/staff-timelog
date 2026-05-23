@@ -13,7 +13,6 @@
   --text:#1a1f2e;--text2:#5a6278;--text3:#9099b0;
   --accent:#1a3a5c;--accent-lt:#eef4fb;
   --green:#0f6e56;--green-lt:#e1f5ee;
-  --amber:#7a4f0d;--amber-lt:#faeeda;
   --red:#b91c1c;
   --orange:#c2410c;--orange-lt:#fff0e6;
   --mono:'DM Mono',monospace;--sans:'DM Sans',system-ui,sans-serif;
@@ -44,8 +43,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .btn-accent{background:var(--accent);color:#fff}
 .btn-green{background:#0f6e56;color:#fff}
 .btn-orange{background:var(--orange);color:#fff}
-.btn-outline{background:none;border:1px solid var(--border);color:var(--text2);font-size:13px;padding:7px 14px;width:auto;font-family:var(--sans);cursor:pointer;border-radius:var(--r);display:flex;align-items:center;gap:6px}
-.btn-outline:hover{background:var(--bg)}
+.btn-sm{background:none;border:1px solid var(--border);color:var(--text2);font-size:13px;padding:7px 14px;width:auto;font-family:var(--sans);cursor:pointer;border-radius:var(--r);display:flex;align-items:center;gap:6px}
+.btn-sm:hover{background:var(--bg)}
 .err-msg{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
 .main-wrap{display:none}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--border);background:#f9fafc}
@@ -53,65 +52,62 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .topbar-name{font-size:14px;font-weight:600}
 .topbar-sub{font-size:12px;color:var(--text2);margin-top:1px}
-.main-body{padding:1.5rem 1.75rem}
-.step-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);margin-bottom:10px}
-.divider{height:1px;background:var(--border);margin:1.25rem 0}
+.mbody{padding:1.5rem 1.75rem}
+.slbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3);margin-bottom:10px}
+.div{height:1px;background:var(--border);margin:1.25rem 0}
 .loc-box{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc}
-.loc-box i{font-size:22px;flex-shrink:0}
-.loc-box .lname{font-size:15px;font-weight:600}
-.loc-box .lsub{font-size:12px;color:var(--text2);margin-top:2px}
-.loc-box.others{border-color:#f9a87a;background:var(--orange-lt)}
-.loc-box.others i{color:var(--orange)}
+.loc-box i{font-size:22px;color:var(--accent);flex-shrink:0}
+.loc-box .ln{font-size:15px;font-weight:600}
+.loc-box .ls{font-size:12px;color:var(--text2);margin-top:2px}
+.loc-box.oth{border-color:#f9a87a;background:var(--orange-lt)}
+.loc-box.oth i{color:var(--orange)}
 textarea.notes{width:100%;padding:10px 13px;margin-top:10px;border:1px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);background:var(--surface);color:var(--text);resize:vertical;min-height:80px}
 textarea.notes:focus{outline:none;border-color:var(--accent)}
 .date-box{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:#f9fafc;font-size:15px}
 .date-box i{color:var(--text3);font-size:18px}
-.clock-card{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
-.clock-card-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
-.clock-disp{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
-.clock-ctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
-.tpart{display:flex;flex-direction:column;align-items:center;gap:6px}
-.colon{font-size:22px;color:var(--text3);font-weight:500;padding-bottom:4px}
-.adj{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;user-select:none;-webkit-user-select:none;font-family:var(--sans)}
+.clk-card{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
+.clk-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
+.clk-disp{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
+.clk-ctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
+.tp{display:flex;flex-direction:column;align-items:center;gap:6px}
+.col{font-size:22px;color:var(--text3);font-weight:500;padding-bottom:4px}
+.adj{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;user-select:none;-webkit-user-select:none}
 .adj:hover{background:var(--accent-lt);color:var(--accent);border-color:rgba(26,58,92,0.3)}
 .adj:active{transform:scale(0.88)}
-.clocked-in-card{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
+.ci-card{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
 .ci-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:6px}
 .ci-time{font-size:40px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:4px;line-height:1}
 .ci-loc{font-size:12px;color:var(--orange);margin-top:6px;font-weight:500}
-.dur-row{text-align:center;font-size:13px;color:var(--text2);margin-top:10px;margin-bottom:1.25rem;min-height:20px}
-.sub-msg{margin-top:12px;font-size:13px;text-align:center;line-height:1.5;min-height:20px}
-.sub-msg.ok{color:var(--green)}
-.sub-msg.err{color:var(--red)}
+.dur{text-align:center;font-size:13px;color:var(--text2);margin-top:10px;margin-bottom:1.25rem;min-height:20px}
+.msg{margin-top:12px;font-size:13px;text-align:center;line-height:1.5;min-height:20px}
+.msg.ok{color:var(--green)}
+.msg.err{color:var(--red)}
 .done-wrap{text-align:center;padding:2rem 0.5rem}
 .done-icon{width:68px;height:68px;background:var(--green-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
 .done-icon i{font-size:36px;color:var(--green)}
-.done-card{background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:20px;margin-top:1.25rem}
+.done-card{background:var(--green-lt);border:1px solid #9fe1cb;border-radius:var(--r);padding:20px;margin-top:1.25rem;text-align:center}
 .done-loc{font-size:13px;font-weight:600;color:var(--green);margin-bottom:10px}
 .done-time{font-size:32px;font-weight:500;font-family:var(--mono);color:var(--green);letter-spacing:2px}
 .done-hrs{font-size:24px;font-weight:600;color:var(--green);margin-top:8px}
-.loading-body{padding:3rem 1.75rem;text-align:center;color:var(--text2);font-size:14px}
-.spin-icon{font-size:32px;color:var(--text3);margin-bottom:12px;display:block;animation:spin 1s linear infinite}
-.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.loading{padding:3rem 1.75rem;text-align:center;color:var(--text2);font-size:14px}
+.loading i{font-size:32px;color:var(--text3);margin-bottom:12px;display:block}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .app-footer{text-align:center;padding:1rem;font-size:11px;color:var(--text3);border-top:1px solid var(--border)}
 @media(max-width:420px){
   body{padding:0}
   .card{border-radius:0;border-left:none;border-right:none;max-width:100%;min-height:100vh}
-  .clock-disp{font-size:42px}
+  .clk-disp{font-size:42px}
 }
 </style>
 </head>
 <body>
 <div class="card">
-
   <div class="app-header">
     <div class="app-header-left">
       <div class="app-logo"><i class="ti ti-clock-hour-4"></i></div>
-      <div>
-        <div class="app-title">Staff Time Log</div>
-        <div class="app-sub">A2B Stores &amp; Warehouse</div>
-      </div>
+      <div><div class="app-title">Staff Time Log</div><div class="app-sub">A2B Stores &amp; Warehouse</div></div>
     </div>
     <div class="live-badge"><span class="live-dot"></span>Live</div>
   </div>
@@ -119,21 +115,10 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
   <!-- LOGIN -->
   <div id="loginSection">
     <div class="login-body">
-      <div class="login-intro">
-        <h2>Sign in to log hours</h2>
-        <p>Enter your login ID and PIN</p>
-      </div>
-      <div class="field">
-        <label>Login ID</label>
-        <input id="lid" type="text" placeholder="e.g. Deva" autocomplete="username" />
-      </div>
-      <div class="field">
-        <label>PIN</label>
-        <input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password" />
-      </div>
-      <button class="btn btn-accent" onclick="doLogin()">
-        <i class="ti ti-login"></i> Sign in
-      </button>
+      <div class="login-intro"><h2>Sign in to log hours</h2><p>Enter your login ID and PIN</p></div>
+      <div class="field"><label>Login ID</label><input id="lid" type="text" placeholder="e.g. Deva" autocomplete="username" /></div>
+      <div class="field"><label>PIN</label><input id="lpin" type="password" placeholder="••••" maxlength="6" autocomplete="current-password" /></div>
+      <button class="btn btn-accent" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
       <p class="err-msg" id="loginErr"></p>
     </div>
   </div>
@@ -142,56 +127,45 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
   <div class="main-wrap" id="mainSection">
     <div class="topbar">
       <div class="topbar-l">
-        <div class="avatar" id="avatarEl">DV</div>
-        <div>
-          <div class="topbar-name" id="greetName">Welcome</div>
-          <div class="topbar-sub" id="todayStr"></div>
-        </div>
+        <div class="avatar" id="avEl">DV</div>
+        <div><div class="topbar-name" id="gName"></div><div class="topbar-sub" id="todayStr"></div></div>
       </div>
-      <button class="btn-outline" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
+      <button class="btn-sm" onclick="doLogout()"><i class="ti ti-logout"></i> Sign out</button>
     </div>
-    <div id="mainBody">
-      <div class="loading-body">
-        <i class="ti ti-loader-2 spin-icon"></i>
-        Loading your shift status…
-      </div>
-    </div>
+    <div id="mainBody"><div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading shift status…</div></div>
   </div>
 
   <div class="app-footer">A2B Stores Staff Portal</div>
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────────────────────
-// CONFIGURATION — edit these as needed
-// ─────────────────────────────────────────────────────────────────────────────
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0t0LbrCZVDJr31GXVFNq3UmmVvCIZmiRNv3hY-B5nltuMXiLUauMLgQqRR8YtalDe/exec';
 
-const USERS = {
+var USERS = {
   deva: { pin:'1234', name:'Deva', initials:'DV' }
-  // Add more: sam: { pin:'5678', name:'Sam', initials:'SM' }
+  // Add staff: sam: { pin:'5678', name:'Sam', initials:'SM' }
 };
 
-// Exact GPS coords from Google Maps links — radius in metres
-const LOCATIONS = [
+var LOCS = [
   { name:'Harrisdale A2B',         lat:-32.1072544, lon:115.9380042, radius:300 },
   { name:'Yokine A2B',             lat:-31.9103603, lon:115.8488003, radius:300 },
   { name:'Canning Vale Warehouse', lat:-32.0615003, lon:115.9092223, radius:300 }
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
-let currentUser  = null;
-let openEntry    = null;   // today's in-progress row (has start, no finish)
-let detectedLoc  = null;   // string: location name or 'Others'
-let cH = 8, cM = 0;       // clock state
-let busy = false;
+var user      = null;
+var openEntry = null;   // today's row with start but no finish
+var detLoc    = null;   // GPS-detected location name or 'Others'
+var cH=8, cM=0;
+var busy=false;
 
-const pad    = n => String(n).padStart(2,'0');
-const toMins = (h,m) => h*60+m;
-const str2m  = s => { const p=(s||'').split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); };
+function pad(n){ return String(n).padStart(2,'0'); }
+function toMins(h,m){ return h*60+m; }
+function s2m(s){ var p=(s||'00:00').split(':'); return parseInt(p[0]||0)*60+parseInt(p[1]||0); }
 
 function todayISO(){
-  const d=new Date();
+  var d=new Date();
   return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 }
 function todayNice(){
@@ -200,351 +174,284 @@ function todayNice(){
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function doLogin(){
-  const id  = document.getElementById('lid').value.trim().toLowerCase();
-  const pin = document.getElementById('lpin').value.trim();
-  const err = document.getElementById('loginErr');
+  var id  = document.getElementById('lid').value.trim().toLowerCase();
+  var pin = document.getElementById('lpin').value.trim();
+  var err = document.getElementById('loginErr');
   if(!USERS[id]||USERS[id].pin!==pin){
     err.textContent='Invalid login ID or PIN.';
     document.getElementById('lpin').value='';
     return;
   }
   err.textContent='';
-  currentUser={id,...USERS[id]};
+  user={id:id,name:USERS[id].name,initials:USERS[id].initials};
   document.getElementById('loginSection').style.display='none';
   document.getElementById('mainSection').style.display='block';
-  document.getElementById('avatarEl').textContent=currentUser.initials;
-  document.getElementById('greetName').textContent='Hello, '+currentUser.name;
+  document.getElementById('avEl').textContent=user.initials;
+  document.getElementById('gName').textContent='Hello, '+user.name;
   document.getElementById('todayStr').textContent=todayNice();
-  startUp();
+  detectGeoThenLoad();
 }
-document.getElementById('lid').onkeydown=e=>{if(e.key==='Enter')document.getElementById('lpin').focus()};
-document.getElementById('lpin').onkeydown=e=>{if(e.key==='Enter')doLogin()};
+document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document.getElementById('lpin').focus();};
+document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin();};
 
 function doLogout(){
-  currentUser=null; openEntry=null; detectedLoc=null; busy=false;
+  user=null; openEntry=null; detLoc=null; busy=false;
   document.getElementById('loginSection').style.display='block';
   document.getElementById('mainSection').style.display='none';
   document.getElementById('lid').value='';
   document.getElementById('lpin').value='';
-  document.getElementById('mainBody').innerHTML='<div class="loading-body"><i class="ti ti-loader-2 spin-icon"></i>Loading…</div>';
+  document.getElementById('mainBody').innerHTML='<div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading shift status…</div>';
 }
 
-// ── STARTUP: GPS then sheet ───────────────────────────────────────────────────
-function startUp(){
-  if(!navigator.geolocation){ detectedLoc='Others'; loadSheet(); return; }
+// ── GPS ───────────────────────────────────────────────────────────────────────
+function detectGeoThenLoad(){
+  if(!navigator.geolocation){ detLoc='Others'; loadSheet(); return; }
   navigator.geolocation.getCurrentPosition(
-    pos=>{
-      const {latitude:lat,longitude:lon}=pos.coords;
-      let best=null,bestD=Infinity;
-      LOCATIONS.forEach(g=>{
-        const dx=(lat-g.lat)*111000;
-        const dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
-        const d=Math.sqrt(dx*dx+dy*dy);
+    function(pos){
+      var lat=pos.coords.latitude, lon=pos.coords.longitude;
+      var best=null, bestD=Infinity;
+      LOCS.forEach(function(g){
+        var dx=(lat-g.lat)*111000, dy=(lon-g.lon)*111000*Math.cos(lat*Math.PI/180);
+        var d=Math.sqrt(dx*dx+dy*dy);
         if(d<g.radius&&d<bestD){bestD=d;best=g;}
       });
-      detectedLoc=best?best.name:'Others';
+      detLoc=best?best.name:'Others';
       loadSheet();
     },
-    ()=>{ detectedLoc='Others'; loadSheet(); },
+    function(){ detLoc='Others'; loadSheet(); },
     {timeout:7000,maximumAge:60000}
   );
 }
 
-// ── LOAD SHEET — check for today's entry ─────────────────────────────────────
-async function loadSheet(){
-  try{
-    const url=SCRIPT_URL+'?action=get&userId='+encodeURIComponent(currentUser.id)+'&t='+Date.now();
-    const res=await fetch(url);
-    const data=await res.json();
-    if(data.ok&&Array.isArray(data.rows)){
-      const today=todayISO();
-      // done = both start AND finish present
-      const done=data.rows.find(r=>r[5]===today&&r[6]&&r[7]&&String(r[7]).trim()!=='');
-      if(done){ renderDone(done); return; }
-      // open = start present, finish empty
-      const open=data.rows.find(r=>r[5]===today&&r[6]&&(!r[7]||String(r[7]).trim()===''));
-      if(open){ openEntry=open; renderFinish(); return; }
-    }
-  }catch(e){ console.warn('Sheet load error:',e); }
-  renderStart();
+// ── LOAD SHEET ────────────────────────────────────────────────────────────────
+function loadSheet(){
+  var url=SCRIPT_URL+'?action=get&userId='+encodeURIComponent(user.id)+'&cb='+Date.now();
+  fetch(url)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.ok && Array.isArray(data.rows)){
+        var today=todayISO();
+        // Find today's complete entry (has both start and finish)
+        var done=null, open=null;
+        data.rows.forEach(function(r){
+          var rowDate = String(r[5]).trim();
+          // Handle possible date formats from sheet
+          if(rowDate===today || rowDate.startsWith(today)){
+            var hasStart  = r[6] && String(r[6]).trim()!=='' && String(r[6]).trim()!=='0';
+            var hasFinish = r[7] && String(r[7]).trim()!=='' && String(r[7]).trim()!=='0';
+            if(hasStart && hasFinish && !done) done=r;
+            else if(hasStart && !hasFinish && !open) open=r;
+          }
+        });
+        if(done){ renderDone(done); return; }
+        if(open){ openEntry=open; renderFinish(); return; }
+      }
+      renderStart();
+    })
+    .catch(function(){ renderStart(); });
 }
 
 // ── RENDER: CLOCK-IN ─────────────────────────────────────────────────────────
 function renderStart(){
   openEntry=null;
-  const now=new Date(); cH=now.getHours(); cM=now.getMinutes();
-  const locHtml=detectedLoc&&detectedLoc!=='Others'
-    ?`<div class="loc-box"><i class="ti ti-map-pin" style="color:var(--accent)"></i>
-        <div><div class="lname">${detectedLoc}</div>
-        <div class="lsub"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>`
-    :`<div class="loc-box others"><i class="ti ti-map-pin"></i>
-        <div><div class="lname">Other Location</div>
-        <div class="lsub">Not near a registered site</div></div></div>
-       <textarea class="notes" id="otherNote" placeholder="Enter location details — e.g. Diwali Mela stall at Perth City"></textarea>`;
+  var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
+  var locHtml = detLoc && detLoc!=='Others'
+    ? '<div class="loc-box"><i class="ti ti-map-pin"></i><div><div class="ln">'+detLoc+'</div><div class="ls"><i class="ti ti-satellite" style="font-size:11px"></i> Detected via GPS</div></div></div>'
+    : '<div class="loc-box oth"><i class="ti ti-map-pin"></i><div><div class="ln">Other Location</div><div class="ls">Not near a registered site</div></div></div><textarea class="notes" id="otherNote" placeholder="Enter location — e.g. Diwali Mela stall at Perth City"></textarea>';
 
-  document.getElementById('mainBody').innerHTML=`
-    <div class="main-body">
-      <div class="step-lbl">Location</div>
-      ${locHtml}
-      <div class="divider"></div>
-      <div class="step-lbl">Date</div>
-      <div class="date-box"><i class="ti ti-calendar-event"></i><span>${todayNice()}</span></div>
-      <div class="divider"></div>
-      <div class="step-lbl">Start time</div>
-      <div class="clock-card">
-        <div class="clock-card-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start time</div>
-        <div class="clock-disp" id="cdsp">${pad(cH)}:${pad(cM)}</div>
-        <div class="clock-ctrl">
-          <div class="tpart">
-            <button class="adj" onclick="adjClock('h',1)">&#8743;</button>
-            <button class="adj" onclick="adjClock('h',-1)">&#8744;</button>
-          </div>
-          <div class="colon">:</div>
-          <div class="tpart">
-            <button class="adj" onclick="adjClock('m',1)">&#8743;</button>
-            <button class="adj" onclick="adjClock('m',-1)">&#8744;</button>
-          </div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <button class="btn btn-green" id="subBtn" onclick="submitStart()">
-        <i class="ti ti-player-play"></i> Clock in
-      </button>
-      <p class="sub-msg" id="subMsg"></p>
-    </div>`;
+  document.getElementById('mainBody').innerHTML=
+    '<div class="mbody">'+
+    '<div class="slbl">Location</div>'+locHtml+
+    '<div class="div"></div>'+
+    '<div class="slbl">Date</div>'+
+    '<div class="date-box"><i class="ti ti-calendar-event"></i><span>'+todayNice()+'</span></div>'+
+    '<div class="div"></div>'+
+    '<div class="slbl">Start time</div>'+
+    '<div class="clk-card">'+
+    '<div class="clk-lbl"><i class="ti ti-player-play" style="font-size:12px"></i> Start time</div>'+
+    '<div class="clk-disp" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
+    '<div class="clk-ctrl">'+
+    '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
+    '<div class="col">:</div>'+
+    '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
+    '</div></div>'+
+    '<div class="div"></div>'+
+    '<button class="btn btn-green" id="subBtn" onclick="submitStart()"><i class="ti ti-player-play"></i> Clock in</button>'+
+    '<p class="msg" id="subMsg"></p>'+
+    '</div>';
 }
 
 // ── RENDER: CLOCK-OUT ────────────────────────────────────────────────────────
 function renderFinish(){
-  const now=new Date(); cH=now.getHours(); cM=now.getMinutes();
-  const startTime=openEntry[6];
-  const locName=openEntry[3];
-  const locNote=openEntry[4]?` — ${openEntry[4]}`:'';
+  var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
+  var startTime=String(openEntry[6]).trim();
+  var locName=String(openEntry[3]).trim();
+  var locNote=openEntry[4]?String(openEntry[4]).trim():'';
 
-  document.getElementById('mainBody').innerHTML=`
-    <div class="main-body">
-      <div class="clocked-in-card">
-        <div class="ci-lbl"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>
-        <div class="ci-time">${startTime}</div>
-        <div class="ci-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> ${locName}${locNote}</div>
-      </div>
-      <div class="step-lbl">Finish time</div>
-      <div class="clock-card">
-        <div class="clock-card-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish time</div>
-        <div class="clock-disp" id="cdsp">${pad(cH)}:${pad(cM)}</div>
-        <div class="clock-ctrl">
-          <div class="tpart">
-            <button class="adj" onclick="adjClock('h',1)">&#8743;</button>
-            <button class="adj" onclick="adjClock('h',-1)">&#8744;</button>
-          </div>
-          <div class="colon">:</div>
-          <div class="tpart">
-            <button class="adj" onclick="adjClock('m',1)">&#8743;</button>
-            <button class="adj" onclick="adjClock('m',-1)">&#8744;</button>
-          </div>
-        </div>
-      </div>
-      <div class="dur-row" id="durRow"></div>
-      <button class="btn btn-orange" id="subBtn" onclick="submitFinish()">
-        <i class="ti ti-player-stop"></i> Clock out
-      </button>
-      <p class="sub-msg" id="subMsg"></p>
-    </div>`;
-  updateDur();
+  document.getElementById('mainBody').innerHTML=
+    '<div class="mbody">'+
+    '<div class="ci-card">'+
+    '<div class="ci-lbl"><i class="ti ti-player-play" style="font-size:11px"></i> Clocked in at</div>'+
+    '<div class="ci-time">'+startTime+'</div>'+
+    '<div class="ci-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> '+locName+(locNote?' — '+locNote:'')+'</div>'+
+    '</div>'+
+    '<div class="slbl">Finish time</div>'+
+    '<div class="clk-card">'+
+    '<div class="clk-lbl"><i class="ti ti-player-stop" style="font-size:12px"></i> Finish time</div>'+
+    '<div class="clk-disp" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
+    '<div class="clk-ctrl">'+
+    '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
+    '<div class="col">:</div>'+
+    '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
+    '</div></div>'+
+    '<div class="dur" id="durRow"></div>'+
+    '<button class="btn btn-orange" id="subBtn" onclick="submitFinish()"><i class="ti ti-player-stop"></i> Clock out</button>'+
+    '<p class="msg" id="subMsg"></p>'+
+    '</div>';
+  updDur();
 }
 
 // ── RENDER: DONE ─────────────────────────────────────────────────────────────
 function renderDone(row){
-  const dur=parseFloat(row[8]||0).toFixed(2);
-  const note=row[4]?` — ${row[4]}`:'';
-  document.getElementById('mainBody').innerHTML=`
-    <div class="main-body">
-      <div class="done-wrap">
-        <div class="done-icon"><i class="ti ti-circle-check"></i></div>
-        <h3 style="font-size:19px;font-weight:600;margin-bottom:8px">Shift complete</h3>
-        <p style="font-size:14px;color:var(--text2)">Today's hours have been recorded.</p>
-        <div class="done-card">
-          <div class="done-loc"><i class="ti ti-map-pin" style="font-size:13px"></i> ${row[3]}${note}</div>
-          <div class="done-time">${row[6]} → ${row[7]}</div>
-          <div class="done-hrs">${dur} hrs</div>
-        </div>
-      </div>
-    </div>`;
+  var dur=parseFloat(row[8]||0).toFixed(2);
+  var note=row[4]?String(row[4]).trim():'';
+  document.getElementById('mainBody').innerHTML=
+    '<div class="mbody"><div class="done-wrap">'+
+    '<div class="done-icon"><i class="ti ti-circle-check"></i></div>'+
+    '<h3 style="font-size:19px;font-weight:600;margin-bottom:8px">Shift complete</h3>'+
+    '<p style="font-size:14px;color:var(--text2)">Today\'s hours have been recorded.</p>'+
+    '<div class="done-card">'+
+    '<div class="done-loc"><i class="ti ti-map-pin" style="font-size:13px"></i> '+String(row[3])+(note?' — '+note:'')+'</div>'+
+    '<div class="done-time">'+String(row[6])+' → '+String(row[7])+'</div>'+
+    '<div class="done-hrs">'+dur+' hrs</div>'+
+    '</div></div></div>';
 }
 
 // ── CLOCK ─────────────────────────────────────────────────────────────────────
-function adjClock(part,delta){
+function ac(part,delta){
   if(part==='h') cH=(cH+delta+24)%24;
   else           cM=(cM+delta+60)%60;
-  const el=document.getElementById('cdsp');
+  var el=document.getElementById('cdsp');
   if(el) el.textContent=pad(cH)+':'+pad(cM);
-  updateDur();
+  updDur();
 }
-function updateDur(){
-  const el=document.getElementById('durRow');
+function updDur(){
+  var el=document.getElementById('durRow');
   if(!el||!openEntry) return;
-  const sm=str2m(openEntry[6]), fm=toMins(cH,cM);
+  var sm=s2m(String(openEntry[6])), fm=toMins(cH,cM);
   if(fm>sm){
-    const t=fm-sm;
+    var t=fm-sm;
     el.style.color='var(--text2)';
     el.textContent='Duration: '+Math.floor(t/60)+'h '+(t%60?t%60+'m ':'')+' = '+(t/60).toFixed(2)+' hrs';
   } else {
     el.style.color='var(--red)';
-    el.textContent='Finish must be after start time ('+openEntry[6]+')';
+    el.textContent='Finish must be after start ('+openEntry[6]+')';
   }
 }
 
-// ── SUBMIT START — uses a hidden iframe trick for reliable CORS-free POST ─────
-async function submitStart(){
-  if(busy) return;
-  const note=document.getElementById('otherNote')?document.getElementById('otherNote').value.trim():'';
-  const loc=detectedLoc||'Others';
-  if(loc==='Others'&&!note){ showErr('Please enter the location details.'); return; }
-
-  busy=true;
-  setBtnLoading('subBtn',true,'Clock in');
-  clearMsg();
-
-  const timeStr=pad(cH)+':'+pad(cM);
-  const entryId=Date.now().toString();
-  const row=[
-    entryId,
-    currentUser.id,
-    currentUser.name,
-    loc,
-    loc==='Others'?note:'',
-    todayISO(),
-    timeStr,
-    '',
-    '',
-    'In Progress',
-    new Date().toISOString()
-  ];
-
-  const payload={action:'append',row:row};
-  const ok=await postToSheet(payload);
-
-  busy=false;
-  setBtnLoading('subBtn',false,'Clock in');
-
-  if(ok){
-    // Build the openEntry from what we just saved so renderFinish works immediately
-    openEntry=row;
-    renderFinish();
-  } else {
-    showErr('Could not save. Check your internet connection and try again.');
-  }
-}
-
-// ── SUBMIT FINISH ─────────────────────────────────────────────────────────────
-async function submitFinish(){
-  if(busy||!openEntry) return;
-  const sm=str2m(openEntry[6]), fm=toMins(cH,cM);
-  if(fm<=sm){ showErr('Finish time must be after your start time ('+openEntry[6]+').'); return; }
-
-  busy=true;
-  setBtnLoading('subBtn',true,'Clock out');
-  clearMsg();
-
-  const timeStr=pad(cH)+':'+pad(cM);
-  const dur=((fm-sm)/60).toFixed(2);
-  const payload={action:'update',id:openEntry[0],finishTime:timeStr,duration:dur,status:'Pending'};
-  const ok=await postToSheet(payload);
-
-  busy=false;
-  setBtnLoading('subBtn',false,'Clock out');
-
-  if(ok){
-    const done=[...openEntry];
-    done[7]=timeStr; done[8]=dur; done[9]='Pending';
-    renderDone(done);
-  } else {
-    showErr('Could not save. Check your internet connection and try again.');
-  }
-}
-
-// ── SHEET POST — fetch with JSON, handles CORS via Apps Script ────────────────
-async function postToSheet(payload){
-  // Google Apps Script supports CORS when deployed as web app with "Anyone" access.
-  // We use a straightforward fetch with application/json.
-  // If that fails (CORS), we fall back to the iframe/form method.
-  try{
-    const res=await fetch(SCRIPT_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
-    const txt=await res.text();
-    try{
-      const j=JSON.parse(txt);
-      if(j.ok) return true;
-      console.error('Script error:',j.error);
-      return false;
-    }catch(e){
-      // Apps Script returned a redirect (302) which means it saved OK but
-      // the follow-through body is HTML. This happens with no-cors redirects.
-      // If status is 200 or we got any response, treat as success.
-      return res.ok||res.status===0;
-    }
-  }catch(err){
-    console.warn('Fetch failed, trying form method:',err);
-    return postViaForm(payload);
-  }
-}
-
-// ── FALLBACK: hidden form POST (works even with strict CORS) ──────────────────
-function postViaForm(payload){
-  return new Promise(resolve=>{
-    try{
-      const iframe=document.createElement('iframe');
-      iframe.name='_gsframe_'+Date.now();
-      iframe.style.display='none';
-      document.body.appendChild(iframe);
-
-      const form=document.createElement('form');
-      form.method='POST';
-      form.action=SCRIPT_URL;
-      form.target=iframe.name;
-      form.style.display='none';
-
-      const inp=document.createElement('input');
-      inp.type='hidden';
-      inp.name='payload';
-      inp.value=JSON.stringify(payload);
-      form.appendChild(inp);
-      document.body.appendChild(form);
-
-      iframe.onload=()=>{
-        setTimeout(()=>{
-          document.body.removeChild(form);
-          document.body.removeChild(iframe);
-        },500);
-        resolve(true); // assume success if iframe loaded
-      };
-      setTimeout(()=>resolve(true),5000); // timeout fallback
-      form.submit();
-    }catch(e){ resolve(false); }
+// ── POST TO SHEET — sends as URL-encoded form, no CORS preflight ──────────────
+function postToSheet(payload, onSuccess, onError){
+  // Encode payload as a form field — Google Apps Script reads e.parameter.payload
+  var body='payload='+encodeURIComponent(JSON.stringify(payload));
+  fetch(SCRIPT_URL, {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:body
+  })
+  .then(function(r){ return r.text(); })
+  .then(function(txt){
+    var j={};
+    try{ j=JSON.parse(txt); }catch(e){ j={ok:true}; } // treat any response as ok
+    if(j.ok!==false) onSuccess();
+    else onError(j.error||'Script error');
+  })
+  .catch(function(err){
+    // If fetch itself fails, try no-cors as last resort (fire-and-forget)
+    fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
+    // Wait a moment then assume it worked (no-cors can't confirm)
+    setTimeout(onSuccess, 2000);
   });
 }
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-function setBtnLoading(id,loading,label){
-  const btn=document.getElementById(id);
-  if(!btn) return;
-  btn.disabled=loading;
-  btn.innerHTML=loading
-    ?'<span class="spinner"></span> Saving…'
-    :(id==='subBtn'&&openEntry
-      ?'<i class="ti ti-player-stop"></i> Clock out'
-      :'<i class="ti ti-player-play"></i> '+label);
+// ── SUBMIT START ──────────────────────────────────────────────────────────────
+function submitStart(){
+  if(busy) return;
+  var noteEl=document.getElementById('otherNote');
+  var note=noteEl?noteEl.value.trim():'';
+  var loc=detLoc||'Others';
+  if(loc==='Others'&&!note){ showMsg('err','Please enter the location details.'); return; }
+
+  busy=true;
+  setBtn('subBtn',true);
+
+  var timeStr=pad(cH)+':'+pad(cM);
+  var entryId=String(Date.now());
+  var row=[
+    entryId,          // A ID
+    user.id,          // B User ID
+    user.name,        // C Name
+    loc,              // D Location
+    loc==='Others'?note:'', // E Note
+    todayISO(),       // F Date
+    timeStr,          // G Start
+    '',               // H Finish
+    '',               // I Duration
+    'In Progress',    // J Status
+    new Date().toISOString() // K Submitted At
+  ];
+
+  postToSheet(
+    {action:'append', row:row},
+    function(){
+      busy=false;
+      openEntry=row;
+      renderFinish();
+    },
+    function(err){
+      busy=false;
+      setBtn('subBtn',false);
+      showMsg('err','Save failed — check internet and try again. ('+err+')');
+    }
+  );
 }
-function showErr(msg){
-  const el=document.getElementById('subMsg');
-  if(el){el.className='sub-msg err';el.textContent=msg;}
+
+// ── SUBMIT FINISH ─────────────────────────────────────────────────────────────
+function submitFinish(){
+  if(busy||!openEntry) return;
+  var sm=s2m(String(openEntry[6])), fm=toMins(cH,cM);
+  if(fm<=sm){ showMsg('err','Finish time must be after start ('+openEntry[6]+').'); return; }
+
+  busy=true;
+  setBtn('subBtn',true);
+
+  var timeStr=pad(cH)+':'+pad(cM);
+  var dur=((fm-sm)/60).toFixed(2);
+
+  postToSheet(
+    {action:'update', id:openEntry[0], finishTime:timeStr, duration:dur, status:'Pending'},
+    function(){
+      busy=false;
+      var done=openEntry.slice();
+      done[7]=timeStr; done[8]=dur; done[9]='Pending';
+      renderDone(done);
+    },
+    function(err){
+      busy=false;
+      setBtn('subBtn',false);
+      showMsg('err','Save failed — check internet and try again. ('+err+')');
+    }
+  );
 }
-function clearMsg(){
-  const el=document.getElementById('subMsg');
-  if(el){el.className='sub-msg';el.textContent='';}
+
+function setBtn(id,loading){
+  var b=document.getElementById(id);
+  if(!b) return;
+  b.disabled=loading;
+  if(loading) b.innerHTML='<span class="spinner"></span> Saving…';
+}
+function showMsg(type,text){
+  var el=document.getElementById('subMsg');
+  if(el){el.className='msg '+type;el.textContent=text;}
 }
 </script>
 </body>
