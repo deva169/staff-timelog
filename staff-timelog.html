@@ -142,6 +142,7 @@ var LOCS = [
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
+var SESSION_KEY='staffTimelogUserId';
 var user=null, detLoc=null, todayRows=[], openEntry=null;
 var cH=8, cM=0, busy=false, geoBusy=false, geoMsg='';
 
@@ -160,6 +161,12 @@ function doLogin(){
     document.getElementById('lpin').value='';return;
   }
   document.getElementById('lerr').textContent='';
+  try{localStorage.setItem(SESSION_KEY,id);}catch(e){}
+  startSession(id);
+}
+
+function startSession(id){
+  if(!USERS[id]) return;
   user={id:id,name:USERS[id].name,initials:USERS[id].initials};
   document.getElementById('loginSec').style.display='none';
   document.getElementById('mainSec').style.display='block';
@@ -173,10 +180,17 @@ document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin
 
 function doLogout(){
   user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';cH=8;cM=0;
+  try{localStorage.removeItem(SESSION_KEY);}catch(e){}
   document.getElementById('loginSec').style.display='block';
   document.getElementById('mainSec').style.display='none';
   document.getElementById('lid').value='';document.getElementById('lpin').value='';
   document.getElementById('mainBody').innerHTML='<div class="loading"><i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i>Loading…</div>';
+}
+
+function restoreSession(){
+  var id='';
+  try{id=(localStorage.getItem(SESSION_KEY)||'').toLowerCase();}catch(e){}
+  if(id&&USERS[id]) startSession(id);
 }
 
 // ── GPS ───────────────────────────────────────────────────────────────────────
@@ -499,6 +513,7 @@ function showMsg(type,text){
   var el=document.getElementById('subMsg');
   if(el){el.className='msg '+type;el.textContent=text;}
 }
+restoreSession();
 </script>
 </body>
 </html>
