@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<title>Staff Time Log — A2B Stores</title>
+<title>Trial Time Log</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
 <style>
@@ -28,7 +28,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .logo{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .logo i{font-size:22px;color:#fff}
 .htitle{font-size:16px;font-weight:600;color:#fff}
-.hsub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px}
 .livebadge{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.12);padding:4px 10px;border-radius:20px}
 .ldot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
 .lbody{padding:2rem 1.75rem}
@@ -84,12 +83,6 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
 .clkcard{border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;background:var(--surface);text-align:center}
 .clklbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--text2);margin-bottom:12px}
 .clkd{font-size:52px;font-weight:500;color:var(--accent);letter-spacing:5px;font-family:var(--mono);margin-bottom:14px;line-height:1}
-.clkctrl{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;max-width:180px;margin:0 auto}
-.tp{display:flex;flex-direction:column;align-items:center;gap:6px}
-.col{font-size:22px;color:var(--text3);font-weight:500;padding-bottom:4px}
-.adj{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;user-select:none;-webkit-user-select:none}
-.adj:hover{background:var(--accent-lt);color:var(--accent);border-color:rgba(26,58,92,0.3)}
-.adj:active{transform:scale(0.88)}
 .cicard{background:var(--orange-lt);border:1px solid #f9a87a;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:1.25rem}
 .cilbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--orange);margin-bottom:6px}
 .citime{font-size:40px;font-weight:500;color:var(--orange);font-family:var(--mono);letter-spacing:4px;line-height:1}
@@ -113,7 +106,7 @@ textarea.notes:focus{outline:none;border-color:var(--accent)}
   <div class="hdr">
     <div class="hdr-l">
       <div class="logo"><i class="ti ti-clock-hour-4"></i></div>
-      <div><div class="htitle">Staff Time Log</div><div class="hsub">A2B Stores &amp; Warehouse</div></div>
+      <div><div class="htitle">Trial Time Log</div></div>
     </div>
     <div class="livebadge"><span class="ldot"></span>Live</div>
   </div>
@@ -183,13 +176,21 @@ var SESSION_KEY='staffTimelogUserId';
 var NEW_USER_KEY='staffTimelogNewUsername';
 var pendingRegisteredUser=null;
 var user=null, detLoc=null, todayRows=[], openEntry=null;
-var cH=8, cM=0, busy=false, geoBusy=false, geoMsg='';
+var busy=false, geoBusy=false, geoMsg='';
 
+var AWST_TZ='Australia/Perth';
 var pad=function(n){return String(n).padStart(2,'0');};
 var toM=function(h,m){return h*60+m;};
 var s2m=function(s){var p=(s||'0:0').toString().trim().split(':');return parseInt(p[0]||0)*60+parseInt(p[1]||0);};
-var todayISO=function(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());};
-var todayNice=function(){return new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
+function awstParts(){
+  var parts=new Intl.DateTimeFormat('en-AU',{timeZone:AWST_TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  var out={};
+  parts.forEach(function(p){out[p.type]=p.value;});
+  var hour=out.hour==='24'?'00':out.hour;
+  return {date:out.year+'-'+out.month+'-'+out.day,time:hour+':'+out.minute,mins:toM(parseInt(hour,10),parseInt(out.minute,10))};
+}
+var todayISO=function(){return awstParts().date;};
+var todayNice=function(){return new Date().toLocaleDateString('en-AU',{timeZone:AWST_TZ,weekday:'long',day:'numeric',month:'long',year:'numeric'});};
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 function doLogin(){
@@ -239,7 +240,7 @@ document.getElementById('lid').onkeydown=function(e){if(e.key==='Enter')document
 document.getElementById('lpin').onkeydown=function(e){if(e.key==='Enter')doLogin();};
 
 function doLogout(){
-  user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';cH=8;cM=0;
+  user=null;detLoc=null;todayRows=[];openEntry=null;busy=false;geoBusy=false;geoMsg='';
   try{localStorage.removeItem(SESSION_KEY);}catch(e){}
   try{sessionStorage.removeItem(NEW_USER_KEY);}catch(e){}
   document.getElementById('loginSec').style.display='block';
@@ -453,11 +454,9 @@ function loadSheet(){
         }
       });
     }
-    var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
     render();
   })
   .catch(function(err){
-    var now=new Date(); cH=now.getHours(); cM=now.getMinutes();
     render();
   });
 }
@@ -520,24 +519,28 @@ function render(){
 
   html+='</div>';
   document.getElementById('mainBody').innerHTML=html;
+  startClockDisplay();
 }
 
 function mkClock(lbl){
   return '<div class="clkcard">'+
     '<div class="clklbl">'+lbl+'</div>'+
-    '<div class="clkd" id="cdsp">'+pad(cH)+':'+pad(cM)+'</div>'+
-    '<div class="clkctrl">'+
-      '<div class="tp"><button class="adj" onclick="ac(\'h\',1)">&#8743;</button><button class="adj" onclick="ac(\'h\',-1)">&#8744;</button></div>'+
-      '<div class="col">:</div>'+
-      '<div class="tp"><button class="adj" onclick="ac(\'m\',1)">&#8743;</button><button class="adj" onclick="ac(\'m\',-1)">&#8744;</button></div>'+
-    '</div></div>';
+    '<div class="clkd realClock">'+awstParts().time+'</div>'+
+    '<div class="ls">Real time AWST. Captured when you press the button.</div>'+
+  '</div>';
 }
 
-function ac(part,delta){
-  if(part==='h') cH=(cH+delta+24)%24;
-  else           cM=(cM+delta+60)%60;
-  var el=document.getElementById('cdsp');
-  if(el) el.textContent=pad(cH)+':'+pad(cM);
+function startClockDisplay(){
+  updateClockDisplay();
+  if(window.clockTimer) clearInterval(window.clockTimer);
+  window.clockTimer=setInterval(updateClockDisplay,15000);
+}
+
+function updateClockDisplay(){
+  var nodes=document.querySelectorAll('.realClock');
+  if(!nodes.length) return;
+  var t=awstParts().time;
+  nodes.forEach(function(el){el.textContent=t;});
 }
 
 // ── OVERLAP CHECK ─────────────────────────────────────────────────────────────
@@ -564,7 +567,8 @@ function submitStart(){
   var noteEl=document.getElementById('otherNote');
   var note=noteEl?noteEl.value.trim():'';
 
-  var timeStr=pad(cH)+':'+pad(cM);
+  var nowAwst=awstParts();
+  var timeStr=nowAwst.time;
   if(hasOverlap(s2m(timeStr),-1)){showMsg('err','You already have an active shift. Please clock out first.');return;}
 
   busy=true;setBtn(true,'Checking GPS...');
@@ -623,10 +627,11 @@ function saveStart(loc,note,timeStr){
 function submitFinish(){
   if(busy||!openEntry) return;
   var st=s2m(String(openEntry[6]));
-  var ft=toM(cH,cM);
+  var nowAwst=awstParts();
+  var ft=nowAwst.mins;
   if(ft<=st){showMsg('err','Finish time must be after start ('+openEntry[6]+').');return;}
 
-  var timeStr=pad(cH)+':'+pad(cM);
+  var timeStr=nowAwst.time;
   // Check overlap with other completed entries
   for(var i=0;i<todayRows.length;i++){
     var r=todayRows[i];
